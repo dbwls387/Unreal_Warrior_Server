@@ -35,7 +35,7 @@
 - C++
 - Tensorflow
 - Python
-- Node.js
+- Node.js 
 
 **Infra**
 - Colab ML Server
@@ -47,6 +47,7 @@
 - Notion
 - GitLab
 - Jira
+
 ---
 ## 5. 유사서비스분석
 ```PlainText
