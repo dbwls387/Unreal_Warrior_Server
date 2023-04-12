@@ -35,13 +35,14 @@
 - C++
 - Tensorflow
 - Python
-- Node.js 
+- Node.js
 
 **Infra**
 - Colab ML Server
 - AWS EC2
 - Docker
 - Jenkins
+- NginX
 
 **Team Collaboration Tool**
 - Notion
