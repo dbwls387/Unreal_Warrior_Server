@@ -66,6 +66,7 @@
 -   Notion
 -   GitLab
 -   Jira
+-   SVN
 
 ---
 
