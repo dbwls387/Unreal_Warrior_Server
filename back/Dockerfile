@@ -1,5 +1,5 @@
 # 최신 Node.js LTS 버전
-FROM node:18.12.1
+FROM node:16.15.0
 
 # Node.js 앱을 위한 app 폴더 생성
 RUN mkdir -p /app
@@ -16,7 +16,7 @@ RUN npm install
 # 앱 소스코드 추가
 COPY app.js /app/
 
-# 앱이 3000번 포트에 바인딩 되어있기 때문에 컨테이너의 3000번 포트를 열어줌
+# 앱이 8080번 포트에 바인딩 되어있기 때문에 컨테이너의 8080번 포트를 열어줌
 EXPOSE 8080
 # 인자값을 지정하지 않을시 node app.js를 실행
 CMD [ "node", "app.js" ]
