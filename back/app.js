@@ -13,14 +13,8 @@ const option = {
 
 const server = https.createServer(option, app);
 
-const io = require('socket.io')(server);
-
 app.get('/', function(req, res) {
     res.send("Hello World");
-});
-
-io.sockets.on('connection', function(socket) {
-    console.log('CONNECT');
 });
 
 server.listen(PORT, () => {
