@@ -14,13 +14,13 @@ function App() {
     var form = document.getElementById("form");
     var input = document.getElementById("input");
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (input.value) {
-            socket.emit("chat message", input.value);
-            input.value = "";
-        }
-    });
+    // form.addEventListener("submit", function (e) {
+    //     e.preventDefault();
+    //     if (input.value) {
+    //         socket.emit("chat message", input.value);
+    //         input.value = "";
+    //     }
+    // });
 
     socket.on("chat message", function (msg) {
         var item = document.createElement("li");
@@ -31,17 +31,25 @@ function App() {
     return (
         <div className="App">
             <ul id="messages"></ul>
-            <form id="form" action="">
-                <input
-                    id="input"
-                    autocomplete="off"
-                    onChange={(e) => {
-                        setText(e.target.value);
-                        console.log(text);
-                    }}
-                />
-                <button>Send</button>
-            </form>
+            <input
+                id="input"
+                autocomplete="off"
+                onChange={(e) => {
+                    setText(e.target.value);
+                }}
+            />
+            <button
+                onClick={(e) => {
+                    console.log(text);
+                    e.preventDefault();
+                    if (input.value) {
+                        socket.emit("chat message", input.value);
+                        input.value = "";
+                    }
+                }}
+            >
+                Send
+            </button>
         </div>
     );
 }
