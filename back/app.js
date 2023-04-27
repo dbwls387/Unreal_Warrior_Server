@@ -1,29 +1,26 @@
 const express = require('express');
+const fs = require('fs');
+const https = require('https');
 const app = express();
-
-const ws = require('ws');
 
 const PORT = 8080;
 
-app.get('/', function(req, res) {
+const option = {
+    ca: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/fullchain.pem'),
+    key: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/privteKey.pem'),
+    cert: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/cert.pem')
+};
+
+const server = https.createServer(option, app);
+
+server.get('/', function(req, res) {
   res.send('Hello World');
 });
-
-const wsSocketServer = new ws.Server(
-    {
-        server: 'https://k8e202.p.ssafy.io',
-        port: 8080
-    }
-);
 
 // io.on('connection', function(socket) {
 //     console.log('CONNECT');
 // });
 
-wsSocketServer.on('connection', (ws, request) => {
-    console.log('CONNECTED');
-});
-
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server running on https://k8e202.p.ssafy.io:${PORT}`);
 });
