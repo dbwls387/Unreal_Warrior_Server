@@ -16,6 +16,10 @@ app.get('/', function(req, res) {
 //     cert: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/cert.pem')
 // };
 
+io.on('connection', function(socket) {
+    console.log('connected');
+});
+
 http.listen(PORT, () => {
     console.log(`Server running on https://k8e202.p.ssafy.io:${PORT}`);
 });
