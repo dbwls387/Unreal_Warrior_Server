@@ -1,28 +1,22 @@
 const express = require('express');
-const io = require('socket.io')();
-
 const app = express();
+const http = require('https');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+
 const PORT = 8080;
 
-app.get("/", (req, res) => {
-    res.send("Hello World");
+app.get('/', (req, res) => {
+  res.send('hello world');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://k8e202.p.ssafy.io:${PORT}`);
-});
-
-app.io = require('socket.io')();
-
-app.io.on('connection',(socket) => {
-  console.log('유저가 들어왔다');
-
-  socket.on('disconnect', () => {
-      console.log('유저 나갔다');
+io.on('connection', (socket) => {
+    socket.on('chat message', (msg) => {
+      console.log('message: ' + msg);
+    });
   });
 
-  socket.on('chat-msg', (msg) => {
-    app.io.emit('chat-msg', msg);
-  });
-
+server.listen(PORT, () => {
+  console.log(`listening on *: ${PORT}`);
 });
