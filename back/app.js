@@ -11,10 +11,7 @@ const option = {
     cert: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/cert.pem')
 };
 
-const server = https.createServer(option, (req, res) => {
-    console.log(req);
-    res.send("Hello World");
-});
+const server = https.createServer(option, app);
 
 server.listen(PORT, () => {
     console.log(`Server running on https://k8e202.p.ssafy.io:${PORT}`);
