@@ -7,11 +7,12 @@ const io = require('socket.io')(http);
 const PORT = 8080;
 
 app.get('/', function(req, res) {
-    io.on('connection', function(socket) {
-        console.log('connected');
-    });
-    res.send('Hello World');
-})
+    res.send('Hello World'); 
+});
+
+io.on('connection', function(socket) {
+    console.log('connected');
+});
 
 // const option = {
 //     ca: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/fullchain.pem'),
