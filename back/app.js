@@ -2,7 +2,7 @@ const app = require('express')();
 // const fs = require('fs');
 // const https = require('https');
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io');
 
 const PORT = 8080;
 
