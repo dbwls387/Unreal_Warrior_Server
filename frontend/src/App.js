@@ -41,9 +41,9 @@ function App() {
             />
             <button
                 onClick={(e) => {
-                    console.log(text);
                     e.preventDefault();
                     if (input.value) {
+                        console.log(socket);
                         socket.emit("chat message", input.value);
                         input.value = "";
                     }
