@@ -1,5 +1,5 @@
 const express = require('express');
-const io = require('socket.io')(https, {cors : {origin : '*'}});
+const io = require('socket.io')();
 
 const app = express();
 const PORT = 8080;
@@ -12,13 +12,17 @@ app.listen(PORT, () => {
     console.log(`Server running on http://k8e202.p.ssafy.io:${PORT}`);
 });
 
-io.on('connection', function(socket) {
-    console.log(socket.id, 'Connected');
-    socket.emit('msg', socket.id + ' 연결되었습니다.');
+app.io = require('socket.io')();
 
-    socket.on('msg', function(data) {
-        console.log(socket.id, data);
+app.io.on('connection',(socket) => {
+  console.log('유저가 들어왔다');
 
-        socket.emit('msg', `Server ${data}를 받았습니다.`);
-    });
+  socket.on('disconnect', () => {
+      console.log('유저 나갔다');
+  });
+
+  socket.on('chat-msg', (msg) => {
+    app.io.emit('chat-msg', msg);
+  });
+
 });
