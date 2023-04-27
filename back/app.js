@@ -12,6 +12,7 @@ const option = {
 };
 
 const server = https.createServer(option, (req, res) => {
+    console.log(req);
     res.send("Hello World");
 });
 
