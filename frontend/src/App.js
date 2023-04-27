@@ -1,40 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 import { io } from "socket.io-client";
+import { useState } from "react";
 
-function App() {	
-
+function App() {
     var socket = io();
 
-      console.log(socket);
+    const [text, setText] = useState("");
 
-      var messages = document.getElementById('messages');
-      var form = document.getElementById('form');
-      var input = document.getElementById('input');
+    console.log(socket);
 
-      form.addEventListener('submit', function(e) {
+    var messages = document.getElementById("messages");
+    var form = document.getElementById("form");
+    var input = document.getElementById("input");
+
+    form.addEventListener("submit", function (e) {
         e.preventDefault();
         if (input.value) {
-          socket.emit('chat message', input.value);
-          input.value = '';
+            socket.emit("chat message", input.value);
+            input.value = "";
         }
-      });
+    });
 
-      socket.on('chat message', function(msg) {
-        var item = document.createElement('li');
+    socket.on("chat message", function (msg) {
+        var item = document.createElement("li");
         item.textContent = msg;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
-      });
-  return (
-    <div className="App">
-      <ul id="messages"></ul>
-      <form id="form" action="">
-        <input id="input" autocomplete="off" /><button>Send</button>
-      </form>
-
-    </div>
-  );
+    });
+    return (
+        <div className="App">
+            <ul id="messages"></ul>
+            <form id="form" action="">
+                <input
+                    id="input"
+                    autocomplete="off"
+                    onChange={(e) => {
+                        setText(e.target.value);
+                        console.log(text);
+                    }}
+                />
+                <button>Send</button>
+            </form>
+        </div>
+    );
 }
 
 export default App;
