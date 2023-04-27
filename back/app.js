@@ -1,35 +1,18 @@
 const app = require('express')();
 const http = require('http').Server(app);
-const io = require('socket.io');
-const cors = require('cors');
+const io = require('socket.io')(http);
+const port = process.env.PORT || 8080;
 
-app.use(cors());
-
-const PORT = 8080;
-
-app.get('/', function(req, res) {
-    res.send('Hello World'); 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
 });
 
-const httpServer = http.listen(PORT, () => {
-    console.log(`Server running on https://k8e202.p.ssafy.io:${PORT}`);
+io.on('connection', (socket) => {
+  socket.on('chat message', msg => {
+    io.emit('chat message', msg);
+  });
 });
 
-const socketServer = io(httpServer, {
-    cors: {
-        origin: "*",
-        method: ["GET", "POST"]
-    }
-});
-
-app.get('/socket.io', function(req, res) {
-    socketServer.on('connect', (socket) => {
-        socket.on('test', (req) => {
-            console.log(req);
-        });
-    
-        socket.broadcast.emit('user joined', {
-            username: socket.username
-        })
-    });
+http.listen(port, () => {
+  console.log(`Socket.IO server running at http://localhost:${port}/`);
 });
