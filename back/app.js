@@ -1,16 +1,14 @@
-var app = require('express')();
-var io = require('socket.io')(app);
+const express = require('express');
 
+const express = require('express');
+
+const app = express();
 const PORT = 8080;
 
-app.get('/', (req, res) => {
-  res.send('hello world');
-});
-
-io.on('connection', function(socket) {
-    console.log("CONNECTED");
+app.get("/", (req, res) => {
+    res.send('Hello World');
 });
 
 app.listen(PORT, () => {
-  console.log(`listening on *: ${PORT}`);
+    console.log(`Server running on http://k8e202.p.ssafy.io:${PORT}`);
 });
