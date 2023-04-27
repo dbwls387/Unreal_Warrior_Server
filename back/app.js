@@ -7,8 +7,8 @@ const PORT = 8080;
 
 const option = {
     ca: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/fullchain.pem'),
-    key: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/privkey.pem'),
-    cert: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/cert.pem')
+    // key: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/privkey.pem'),
+    // cert: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/cert.pem')
 };
 
 const server = https.createServer(option, app);
