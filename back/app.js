@@ -10,16 +10,19 @@ app.get('/', function(req, res) {
     res.send('Hello World'); 
 });
 
-io.on('connection', function(socket) {
-    console.log('connected');
+const httpServer = http.listen(PORT, () => {
+    console.log(`Server running on https://k8e202.p.ssafy.io:${PORT}`);
 });
 
-// const option = {
-//     ca: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/fullchain.pem'),
-//     key: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/privkey.pem'),
-//     cert: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/cert.pem')
-// };
+const socketServer = io(httpServer, {
+    cors: {
+        origin: "*",
+        method: ["GET", "POST"]
+    }
+});
 
-http.listen(PORT, () => {
-    console.log(`Server running on https://k8e202.p.ssafy.io:${PORT}`);
+socketServer.on('connect', (socket) => {
+    socket.on('test', (req) => {
+        console.log(req);
+    })
 });
