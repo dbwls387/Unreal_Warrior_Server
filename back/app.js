@@ -1,5 +1,5 @@
 const app = require('express')();
-const io = require('socket.io')(app);
+const io = require('socket.io');
 
 app.get('/', function(req, res) {
   res.send('Hello World');
