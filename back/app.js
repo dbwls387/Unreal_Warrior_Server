@@ -22,12 +22,14 @@ const socketServer = io(httpServer, {
     }
 });
 
-socketServer.on('connect', (socket) => {
-    socket.on('test', (req) => {
-        console.log(req);
+app.get('/socket.io', function(req, res) {
+    socketServer.on('connect', (socket) => {
+        socket.on('test', (req) => {
+            console.log(req);
+        });
+    
+        socket.broadcast.emit('user joined', {
+            username: socket.username
+        })
     });
-
-    socket.broadcast.emit('user joined', {
-        username: socket.username
-    })
 });
