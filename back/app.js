@@ -13,9 +13,15 @@ const option = {
 
 const server = https.createServer(option, app);
 
-// io.on('connection', function(socket) {
-//     console.log('CONNECT');
-// });
+const io = require('socket.io')(server);
+
+app.get('/', function(req, res) {
+    res.send("Hello World");
+});
+
+io.sockets.on('connection', function(socket) {
+    console.log('CONNECT');
+});
 
 server.listen(PORT, () => {
     console.log(`Server running on https://k8e202.p.ssafy.io:${PORT}`);
