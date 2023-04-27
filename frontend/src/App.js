@@ -9,7 +9,9 @@ function App() {
 		}
 	});
 
-  console.log(socket);
+  socket.on('test', socket => {
+		console.log(socket);
+	})
 
   return (
     <div className="App">
