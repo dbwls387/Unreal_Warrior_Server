@@ -14,6 +14,7 @@ function App() {
 	});
 
   const handleRequestSocket = () => {
+    console.log(socket);
 		socket.emit("test", {
 			data: 'test socket on client'
 		});
