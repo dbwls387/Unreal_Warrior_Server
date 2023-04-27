@@ -1,8 +1,9 @@
 const app = require('express')();
-// const fs = require('fs');
-// const https = require('https');
 const http = require('http').Server(app);
 const io = require('socket.io');
+const cors = require('cors');
+
+app.use(cors());
 
 const PORT = 8080;
 
@@ -24,5 +25,9 @@ const socketServer = io(httpServer, {
 socketServer.on('connect', (socket) => {
     socket.on('test', (req) => {
         console.log(req);
+    });
+
+    socket.broadcast.emit('user joined', {
+        username: socket.username
     })
 });

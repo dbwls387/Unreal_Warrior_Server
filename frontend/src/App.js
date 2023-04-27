@@ -18,6 +18,10 @@ function App() {
 		socket.emit("test", {
 			data: 'test socket on client'
 		});
+
+    socket.on('user joined', (data) => {
+      console.log(data);
+    })
 	};
 	
 	function handleChange() {
