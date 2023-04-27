@@ -11,7 +11,9 @@ const option = {
     cert: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/cert.pem')
 };
 
-const server = https.createServer(option, app);
+const server = https.createServer(option, (req, res) => {
+    res.send("Hello World");
+});
 
 app.get('/', function(req, res) {
     res.send("Hello World");
