@@ -1,7 +1,14 @@
 const express = require('express');
+const fs = require('fs');
 const https = require('https');
 const app = express();
-const server = https.createServer(app);
+
+const options = {
+    key: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/fullchain.pem'),
+    cert: fs.readFileSync('/var/jenkins_home/workspace/deploy/sslkey/privkey.pem')
+};
+
+const server = https.createServer(options, app);
 
 const PORT = 8080;
 
