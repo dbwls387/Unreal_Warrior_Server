@@ -9,6 +9,8 @@ function App() {
 		}
 	});
 
+  console.log(socket);
+
   return (
     <div className="App">
     </div>
