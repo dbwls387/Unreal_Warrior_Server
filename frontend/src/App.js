@@ -23,6 +23,7 @@ function App() {
     // });
 
     socket.on("chat message", function (msg) {
+      console.log(msg);
         var item = document.createElement("li");
         item.textContent = msg;
         messages.appendChild(item);
