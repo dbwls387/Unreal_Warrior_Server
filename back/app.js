@@ -15,10 +15,6 @@ const server = https.createServer(option, (req, res) => {
     res.send("Hello World");
 });
 
-app.get('/', function(req, res) {
-    res.send("Hello World");
-});
-
 server.listen(PORT, () => {
     console.log(`Server running on https://k8e202.p.ssafy.io:${PORT}`);
 });
