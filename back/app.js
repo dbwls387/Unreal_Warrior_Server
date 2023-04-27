@@ -1,5 +1,7 @@
-const app = require('express')();
-const io = require('socket.io');
+const express = require('express')();
+// const io = require('socket.io');
+
+const PORT = 8080;
 
 app.get('/', function(req, res) {
   res.send('Hello World');
