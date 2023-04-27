@@ -1,9 +1,11 @@
 const express = require('express');
+const https = require('https');
 const app = express();
+const server = https.createServer(app);
 
 const PORT = 8080;
 
-app.get('/', function(req, res) {
+server.get('/', function(req, res) {
   res.send('Hello World');
 });
 
@@ -11,6 +13,6 @@ app.get('/', function(req, res) {
 //     console.log('CONNECT');
 // });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server running on http://k8e202.p.ssafy.io:${PORT}`);
 });
