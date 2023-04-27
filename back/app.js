@@ -13,10 +13,6 @@ const option = {
 
 const server = https.createServer(option, app);
 
-server.get('/', function(req, res) {
-  res.send('Hello World');
-});
-
 // io.on('connection', function(socket) {
 //     console.log('CONNECT');
 // });
