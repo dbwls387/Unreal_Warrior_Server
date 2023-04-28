@@ -7,22 +7,12 @@ function App() {
     var socket = io("https://k8e202.p.ssafy.io", {
         path: "/socket.io",
     });
+    console.log(socket);
 
     const [text, setText] = useState("");
 
-    console.log(socket);
-
     var messages = document.getElementById("messages");
-    var form = document.getElementById("form");
     var input = document.getElementById("input");
-
-    // form.addEventListener("submit", function (e) {
-    //     e.preventDefault();
-    //     if (input.value) {
-    //         socket.emit("chat message", input.value);
-    //         input.value = "";
-    //     }
-    // });
 
     socket.on("chat message", function (msg) {
         console.log(msg);
@@ -31,16 +21,11 @@ function App() {
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
     });
+
     return (
         <div className="App">
             <ul id="messages"></ul>
-            <input
-                id="input"
-                autocomplete="off"
-                onChange={(e) => {
-                    setText(e.target.value);
-                }}
-            />
+            <input id="input" autocomplete="off" />
             <button
                 onClick={(e) => {
                     e.preventDefault();
