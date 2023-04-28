@@ -4,10 +4,11 @@ const io = require('socket.io')(http);
 const port = process.env.PORT || 8080;
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.redirect('https://k8e202.p.ssafy.io');
 });
 
 io.on('connection', (socket) => {
+  console.log(socket);
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
