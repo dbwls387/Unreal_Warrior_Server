@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import { useState } from "react";
 
 function App() {
-    var socket = io('https://k8e202.p.ssafy.io');
+    var socket = io("https://k8e202.p.ssafy.io/socket.io");
 
     const [text, setText] = useState("");
 
@@ -23,7 +23,7 @@ function App() {
     // });
 
     socket.on("chat message", function (msg) {
-      console.log(msg);
+        console.log(msg);
         var item = document.createElement("li");
         item.textContent = msg;
         messages.appendChild(item);
