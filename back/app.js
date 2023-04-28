@@ -12,6 +12,10 @@ io.on('connection', (socket) => {
   socket.on('chat message', msg => {
     io.emit('chat message', msg);
   });
+
+  socket.on('actor status', msg => {
+    console.log(msg);
+  });
 });
 
 http.listen(port, () => {
