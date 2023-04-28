@@ -4,7 +4,9 @@ import { io } from "socket.io-client";
 import { useState } from "react";
 
 function App() {
-    var socket = io("https://k8e202.p.ssafy.io/socket.io");
+    var socket = io("https://k8e202.p.ssafy.io", {
+        path: "/socket.io",
+    });
 
     const [text, setText] = useState("");
 
