@@ -25,14 +25,21 @@ function App() {
     return (
         <div className="App">
             <ul id="messages"></ul>
-            <input id="input" autocomplete="off" />
+            <input
+                id="input"
+                autocomplete="off"
+                onChange={(e) => {
+                    setText(e.target.value);
+                }}
+            />
             <button
                 onClick={(e) => {
+                    console.log(text);
+
                     e.preventDefault();
-                    if (input.value) {
-                        console.log(socket);
-                        socket.emit("chat message", input.value);
-                        input.value = "";
+                    if (text) {
+                        socket.emit("chat message", text);
+                        setText("");
                     }
                 }}
             >
