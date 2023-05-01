@@ -6,7 +6,7 @@ const port = process.env.PORT || 8080;
 const tf = require('@tensorflow/tfjs');
 
 async function loadModel() {
-  const model = await tf.loadLayersModel('model.json');
+  const model = await tf.loadLayersModel('./model.json');
   // model.predict(tf.tensor3d([[0.5, 0.5, 0.5]])).print();
 }
 
