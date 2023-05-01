@@ -10,9 +10,7 @@ function App() {
     console.log(socket);
 
     const [text, setText] = useState("");
-
     var messages = document.getElementById("messages");
-    var input = document.getElementById("input");
 
     socket.on("chat message", function (msg) {
         console.log(msg);
@@ -26,8 +24,6 @@ function App() {
         <div className="App">
             <ul id="messages"></ul>
             <input
-                id="input"
-                autocomplete="off"
                 onChange={(e) => {
                     setText(e.target.value);
                 }}
