@@ -13,8 +13,6 @@ async function loadModel() {
  ]]);
  const prediction = model.predict(inputData);
 
-
- 
  prediction.print();
 }
 
