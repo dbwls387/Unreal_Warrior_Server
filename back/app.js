@@ -11,12 +11,12 @@ async function loadModel() {
 }
 
 app.get("/model", (req, res) => {
-  debug.log("/model");
+  console.log("/model");
   loadModel();
 });
 
 app.get("/", (req, res) => {
-    // res.redirect("https://k8e202.p.ssafy.io");
+    res.redirect("https://k8e202.p.ssafy.io");
 });
 
 io.on("connection", (socket) => {
