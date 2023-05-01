@@ -12,7 +12,7 @@ async function loadModel() {
 
 app.get("/model", (req, res) => {
   console.log("/model");
-  loadModel();
+  // loadModel();
 });
 
 app.get("/", (req, res) => {
