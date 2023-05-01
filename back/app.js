@@ -7,12 +7,12 @@ const tf = require('@tensorflow/tfjs');
 
 async function loadModel() {
   const model = await tf.loadLayersModel('model.json');
-  model.predict(tf.tensor3d([[0.5, 0.5, 0.5]])).print();
+  // model.predict(tf.tensor3d([[0.5, 0.5, 0.5]])).print();
 }
 
 app.get("/model", (req, res) => {
   console.log("/model");
-  // loadModel();
+  loadModel();
 });
 
 app.get("/", (req, res) => {
