@@ -3,7 +3,6 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const port = process.env.PORT || 8080;
 
-const { loadGraphModel } = require("@tensorflow/tfjs");
 const tf = require('@tensorflow/tfjs');
 
 async function loadModel() {
@@ -12,7 +11,7 @@ async function loadModel() {
 }
 
 app.get("/model", (req, res) => {
-  console.log("/model");
+  debug.log("/model");
   loadModel();
 });
 
