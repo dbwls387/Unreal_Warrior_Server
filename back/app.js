@@ -4,10 +4,16 @@ const io = require("socket.io")(http);
 const port = process.env.PORT || 8080;
 
 const tf = require('@tensorflow/tfjs');
+const path = require('path');
 
 async function loadModel() {
-  const model = await tf.loadLayersModel('model.json');
-  model.predict(tf.tensor3d([[100, 100, -1500]])).print();
+  const model = await tf.loadLayersModel('file://' + path.join(__dirname, 'model.json'));
+  const inputData = tf.tensor3d([[
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+ ]]);
+ const prediction = model.predict(inputData);
+
+ prediction.print();
 }
 
 app.get("/model", (req, res) => {
