@@ -14,6 +14,10 @@ async function loadModel() {
  const prediction = model.predict(inputData);
 
  prediction.print();
+
+ const result = await prediction.array();
+ console.log("dtdat", result[0]);
+ return result[0];
 }
 
 app.get("/model", (req, res) => {
