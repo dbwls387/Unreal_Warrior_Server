@@ -14,18 +14,12 @@ async function loadModel() {
  const prediction = model.predict(inputData);
 
  prediction.print();
-
- const result = await prediction.array();
- console.log("예측결과11 : ", result[0]);
- return result[0];
 }
 
 app.get("/api/model", (req, res) => {
   console.log("/model");
-
-  loadModel().then(result => {
-  res.send(result);
-  });
+  loadModel();
+  res.send("끗!!!");
 });
 
 app.get("/", (req, res) => {
