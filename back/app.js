@@ -13,18 +13,16 @@ async function loadModel() {
  ]]);
  const prediction = model.predict(inputData);
 
- prediction.print();
-
  const result = await prediction.array();
  console.log("dtdat", result[0]);
  return result[0];
 }
 
 app.get("/model", (req, res) => {
-  console.log("콘솔로그");
 //   loadModel();
-  res.send("리스폰스");
-  debug.log("디버그로그");
+  loadModel().then(result => {
+  res.send(result);
+  });
 });
 
 app.get("/", (req, res) => {
