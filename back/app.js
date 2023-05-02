@@ -7,6 +7,7 @@ const tf = require('@tensorflow/tfjs-node');
 const path = require('path');
 
 async function loadModel() {
+  console.log("여기 문제 발생하는듯");
   const model = await tf.loadLayersModel('file://' + path.join(__dirname, 'model.json'));
   const inputData = tf.tensor3d([[
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -23,7 +24,7 @@ app.get("/model", (req, res) => {
   loadModel().then(result => {
   res.send(result);
   });
-  res.send("댄다...");
+  res.send("안댄다...");
 });
 
 app.get("/", (req, res) => {
