@@ -23,6 +23,7 @@ app.get("/model", (req, res) => {
   loadModel().then(result => {
   res.send(result);
   });
+  rsa.send("댄다...");
 });
 
 app.get("/", (req, res) => {
