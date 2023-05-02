@@ -22,7 +22,7 @@ async function loadModel() {
 
 app.get("/model", (req, res) => {
   console.log("콘솔로그");
-  loadModel();
+//   loadModel();
   res.send("리스폰스");
   debug.log("디버그로그");
 });
