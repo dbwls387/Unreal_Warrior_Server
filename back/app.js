@@ -16,10 +16,11 @@ async function loadModel() {
  prediction.print();
 }
 
-app.get("/api/model", (req, res) => {
-  console.log("/model");
+app.get("/model", (req, res) => {
+  console.log("콘솔로그");
   loadModel();
-  res.send("끗!!!");
+  res.send("리스폰스");
+  debug.log("디버그로그");
 });
 
 app.get("/", (req, res) => {
