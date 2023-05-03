@@ -40,20 +40,21 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+    console.log("Connected!");
+
     socket.on("chat message", (msg) => {
         io.emit("chat message", msg);
-    });
-});
-
-io.on("connection", (socket) => {
-    socket.on("actor_status", (msg) => {
-        io.emit("actor_status", msg);
-        console.log("엠에스지", msg);
-    });
-
-    socket.on("sim_control", () => {
-        io.emit("sim_control");
         console.log(msg);
+    });
+
+    socket.on("actor_status", (data) => {
+        io.emit("actor_status", data);
+        console.log("actor_status; ", data);
+    });
+
+    socket.on("sim_control", (data) => {
+        io.emit("sim_control", data);
+        console.log("sim_control: ", data);
     });
 });
 

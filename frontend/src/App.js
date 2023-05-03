@@ -1,59 +1,25 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
 import { io } from "socket.io-client";
-import { useState } from "react";
 
-function App() {
-    var socket = io("https://k8e202.p.ssafy.io", {
-        path: "/socket.io",
-        transports: ["polling"],
-    });
-    console.log(socket);
+// var socket = io("https://k8e202.p.ssafy.io", {
+//     path: "/socket.io",
+//     transports: ["polling"],
+// });
 
-    const [text, setText] = useState("");
-    var messages = document.getElementById("messages");
+let interval = 3000;
+export default function App() {
+    const onSocket = () => {
+        const socket = io("https://k8e202.p.ssafy.io", {
+            path: "/socket.io",
+            transports: ["websocket"],
+        });
 
-    // socket.on("chat message", function (msg) {
-    //     console.log(msg);
-    //     var item = document.createElement("li");
-    //     item.textContent = msg;
-    //     messages.appendChild(item);
-    //     window.scrollTo(0, document.body.scrollHeight);
-    // });
+        setInterval(() => {
+            socket.emit("sim_control", "pause");
+        }, interval);
 
-    // socket.on("sim_control", function (msg) {
-    //     console.log(msg);
-    //     var item = document.createElement("li");
-    //     item.textContent = msg;
-    //     messages.appendChild(item);
-    //     window.scrollTo(0, document.body.scrollHeight);
-    // });
+        socket.on("hi", (data) => console.log(data)); // 서버 -> 클라이언트
+    };
 
-    return (
-        <div className="App">
-            <ul id="messages"></ul>
-            {/* <input
-                onChange={(e) => {
-                    setText(e.target.value);
-                }}
-            /> */}
-            <button
-                onClick={(e) => {
-                    // console.log(text);
-
-                    // e.preventDefault();
-                    // if (text) {
-                    //     socket.emit("sim_control", text);
-                    //     setText("");
-                    // }
-
-                    socket.emit("sim_control", "pause");
-                }}
-            >
-                Pause
-            </button>
-        </div>
-    );
+    return <button onClick={onSocket}>socket 통신 시작</button>;
 }
-
-export default App;
