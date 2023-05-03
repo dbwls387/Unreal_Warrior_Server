@@ -31,23 +31,25 @@ function App() {
     return (
         <div className="App">
             <ul id="messages"></ul>
-            <input
+            {/* <input
                 onChange={(e) => {
                     setText(e.target.value);
                 }}
-            />
+            /> */}
             <button
                 onClick={(e) => {
-                    console.log(text);
+                    // console.log(text);
 
-                    e.preventDefault();
-                    if (text) {
-                        socket.emit("sim_control", text);
-                        setText("");
-                    }
+                    // e.preventDefault();
+                    // if (text) {
+                    //     socket.emit("sim_control", text);
+                    //     setText("");
+                    // }
+
+                    socket.emit("sim_control", "pause");
                 }}
             >
-                Send
+                Pause
             </button>
         </div>
     );
