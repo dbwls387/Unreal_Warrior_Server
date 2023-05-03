@@ -16,6 +16,10 @@ RUN npm install
 # 앱 소스코드 추가
 COPY app.js /app/
 
+# DL 모델 추가
+COPY group1-shard1of1.bin /app/
+COPY model.json /app/
+
 # 앱이 8080번 포트에 바인딩 되어있기 때문에 컨테이너의 8080번 포트를 열어줌
 EXPOSE 8080
 # 인자값을 지정하지 않을시 node app.js를 실행
