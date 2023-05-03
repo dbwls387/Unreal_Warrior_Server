@@ -11,6 +11,7 @@ async function loadModel(inputData) {
         "file://" + path.join(__dirname, "model.json")
     );
      // 입력 데이터 정의
+    console.log(inputData);
     var as = Object.keys(inputData).map(key => inputData[key]);
 
      // 현재(일시적)의 데이터만을 입력으로 받는다면 아래와 같은 형식을 가지지만, 이전의 과거 데이터까지 포함된다면 달라져야함
