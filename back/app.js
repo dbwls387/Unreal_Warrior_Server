@@ -3,7 +3,7 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const port = process.env.PORT || 8080;
 
-// const tf = require("@tensorflow/tfjs-node");
+const tf = require("@tensorflow/tfjs-node");
 const path = require("path");
 
 async function loadModel() {
@@ -27,16 +27,16 @@ async function loadModel() {
     return result[0];
 }
 
-// app.get("/model", (req, res) => {
-//     console.error("ㅇㅅㅇ");
-//     loadModel().then((result) => {
-//         res.send(result);
-//     });
-// });
-
 app.get("/", (req, res) => {
     res.redirect("https://k8e202.p.ssafy.io");
     console.error("이거왜안대");
+});
+
+app.get("/model", (req, res) => {
+    console.error("ㅇㅅㅇ");
+    loadModel().then((result) => {
+        res.send(result);
+    });
 });
 
 io.on("connection", (socket) => {
