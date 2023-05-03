@@ -6,7 +6,7 @@ const port = process.env.PORT || 8080;
 const tf = require("@tensorflow/tfjs-node");
 const path = require("path");
 
-async function loadModel() {
+async function loadModel(inputData) {
     const model = await tf.loadLayersModel(
         "file://" + path.join(__dirname, "model.json")
     );
