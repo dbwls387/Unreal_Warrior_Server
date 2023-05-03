@@ -30,9 +30,9 @@ async function loadModel() {
 app.get("/model", (req, res) => {
     //   loadModel();
     console.error("ㅇㅅㅇ");
-    //   loadModel().then(result => {
-    //   res.send(result);
-    //   });
+      loadModel().then(result => {
+      res.send(result);
+      });
     res.send("안댄다...");
 });
 
