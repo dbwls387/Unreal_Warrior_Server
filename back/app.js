@@ -30,6 +30,7 @@ app.get("/model", (req, res) => {
 
 app.get("/", (req, res) => {
     res.redirect("https://k8e202.p.ssafy.io");
+    console.error("이거왜안대");
 });
 
 io.on("connection", (socket) => {
@@ -41,7 +42,7 @@ io.on("connection", (socket) => {
 io.on("connection", (socket) => {
     socket.on("actor_status", (msg) => {
         io.emit("actor_status", msg);
-        console.log(msg);
+        console.log("엠에스지", msg);
     });
 });
 
