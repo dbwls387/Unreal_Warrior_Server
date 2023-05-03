@@ -49,13 +49,9 @@ app.get("/", (req, res) => {
 
 app.post("/model", (req, res) => {
     console.log(req.body)
-    if ( !req.body == undefined ) {
-        loadModel(req.body).then(result => {
-            res.send(result);
-            });
-    } else {
-        res.send("언디파인드");
-    }
+    loadModel(req.body).then(result => {
+        res.send(result);
+    });
 });
 
 io.on("connection", (socket) => {
