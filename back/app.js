@@ -28,11 +28,10 @@ async function loadModel() {
 }
 
 app.get("/model", (req, res) => {
-    //   loadModel();
-    // console.error("ㅇㅅㅇ");
-    //   loadModel().then(result => {
-    //   res.send(result);
-    //   });
+    console.error("ㅇㅅㅇ");
+      loadModel().then(result => {
+      res.send(result);
+      });
 });
 
 app.get("/", (req, res) => {
