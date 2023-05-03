@@ -6,6 +6,10 @@ const port = process.env.PORT || 8080;
 const tf = require("@tensorflow/tfjs-node");
 const path = require("path");
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 async function loadModel(inputData) {
     const model = await tf.loadLayersModel(
         "file://" + path.join(__dirname, "model.json")
@@ -44,9 +48,9 @@ app.get("/", (req, res) => {
 // });
 
 app.post("/model", (req, res) => {
-    console.log(res.req.body)
+    console.log(req.body)
     if ( !res.req.body == undefined ) {
-        loadModel(res.req.body).then(result => {
+        loadModel(req.body).then(result => {
             res.send(result);
             });
     } else {
