@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
 
 app.post("/model", (req, res) => {
     console.log(req.body)
-    if ( !res.req.body == undefined ) {
+    if ( !req.body == undefined ) {
         loadModel(req.body).then(result => {
             res.send(result);
             });
