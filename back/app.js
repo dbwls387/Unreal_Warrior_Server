@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 // });
 
 app.post("/model", (req, res) => {
-    DLPredict(res.req.body).then(result => {
+    loadModel(res.req.body).then(result => {
     res.send(result);
     });
 });
