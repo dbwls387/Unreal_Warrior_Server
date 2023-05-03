@@ -7,23 +7,25 @@ const tf = require("@tensorflow/tfjs-node");
 const path = require("path");
 
 async function loadModel() {
-    console.error("여기 문제 발생하는듯");
     const model = await tf.loadLayersModel(
         "file://" + path.join(__dirname, "model.json")
     );
-    const inputData = tf.tensor3d([
-        [
-            [
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                1, 1, 1, 1, 1, 1,
-            ],
-        ],
-    ]);
-    const prediction = model.predict(inputData);
+     // 입력 데이터 정의
+    var as = Object.keys(inputData).map(key => inputData[key]);
+
+     // 현재(일시적)의 데이터만을 입력으로 받는다면 아래와 같은 형식을 가지지만, 이전의 과거 데이터까지 포함된다면 달라져야함
+    const tensorData = tf.tensor3d(
+        as, [1, 1, 48]
+    );
+
+    // 예측 수행
+    const prediction = model.predict(tensorData);
+
+    // 결과 출력
+    prediction.print();
 
     const result = await prediction.array();
-    console.error("dtdat", result[0]);
+    console.log("dtdat", result[0]);
     return result[0];
 }
 
@@ -32,10 +34,16 @@ app.get("/", (req, res) => {
     console.error("이거왜안대");
 });
 
-app.get("/model", (req, res) => {
-    console.error("ㅇㅅㅇ");
-    loadModel().then((result) => {
-        res.send(result);
+// app.get("/model", (req, res) => {
+//     console.error("ㅇㅅㅇ");
+//     loadModel().then((result) => {
+//         res.send(result);
+//     });
+// });
+
+app.post("/model", (req, res) => {
+    DLPredict(res.req.body).then(result => {
+    res.send(result);
     });
 });
 
