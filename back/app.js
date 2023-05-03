@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
     console.error("이거왜안대");
 });
 
-// get 으로 딥러닝 모델이 있는지만, 작동하는지만 확인용
+// get 으로 딥러닝 모델이 있는지만, 작동하는지만 확인용 
 // app.get("/model", (req, res) => {
 //     console.error("ㅇㅅㅇ");
 //     loadModel().then((result) => {
