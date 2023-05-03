@@ -4,13 +4,10 @@ import { io } from "socket.io-client";
 import { useState } from "react";
 
 function App() {
-    var socket = io(
-        "https://k8e202.p.ssafy.io",
-        { transports: ["polling"] },
-        {
-            path: "/socket.io",
-        }
-    );
+    var socket = io("https://k8e202.p.ssafy.io", {
+        path: "/socket.io",
+        transports: ["polling"],
+    });
     console.log(socket);
 
     const [text, setText] = useState("");
@@ -24,13 +21,13 @@ function App() {
     //     window.scrollTo(0, document.body.scrollHeight);
     // });
 
-    socket.on("sim_control", function (msg) {
-        console.log(msg);
-        var item = document.createElement("li");
-        item.textContent = msg;
-        messages.appendChild(item);
-        window.scrollTo(0, document.body.scrollHeight);
-    });
+    // socket.on("sim_control", function (msg) {
+    //     console.log(msg);
+    //     var item = document.createElement("li");
+    //     item.textContent = msg;
+    //     messages.appendChild(item);
+    //     window.scrollTo(0, document.body.scrollHeight);
+    // });
 
     return (
         <div className="App">
