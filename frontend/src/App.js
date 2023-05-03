@@ -4,9 +4,13 @@ import { io } from "socket.io-client";
 import { useState } from "react";
 
 function App() {
-    var socket = io("https://k8e202.p.ssafy.io", {
-        path: "/socket.io",
-    });
+    var socket = io(
+        "https://k8e202.p.ssafy.io",
+        { transports: ["polling"] },
+        {
+            path: "/socket.io",
+        }
+    );
     console.log(socket);
 
     const [text, setText] = useState("");
