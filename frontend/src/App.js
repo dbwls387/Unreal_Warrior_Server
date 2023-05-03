@@ -11,12 +11,13 @@ export default function App() {
     const onSocket = () => {
         const socket = io("https://k8e202.p.ssafy.io", {
             path: "/socket.io",
-            transports: ["websocket"],
+            // transports: ["websocket"],
         });
 
-        setInterval(() => {
-            socket.emit("sim_control", "pause");
-        }, interval);
+        socket.emit("sim_control", "pause");
+
+        // setInterval(() => {
+        // }, interval);
 
         socket.on("hi", (data) => console.log(data)); // 서버 -> 클라이언트
     };
