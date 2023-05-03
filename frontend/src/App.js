@@ -12,7 +12,15 @@ function App() {
     const [text, setText] = useState("");
     var messages = document.getElementById("messages");
 
-    socket.on("chat message", function (msg) {
+    // socket.on("chat message", function (msg) {
+    //     console.log(msg);
+    //     var item = document.createElement("li");
+    //     item.textContent = msg;
+    //     messages.appendChild(item);
+    //     window.scrollTo(0, document.body.scrollHeight);
+    // });
+
+    socket.on("sim_control", function (msg) {
         console.log(msg);
         var item = document.createElement("li");
         item.textContent = msg;
@@ -34,7 +42,7 @@ function App() {
 
                     e.preventDefault();
                     if (text) {
-                        socket.emit("chat message", text);
+                        socket.emit("sim_control", text);
                         setText("");
                     }
                 }}
