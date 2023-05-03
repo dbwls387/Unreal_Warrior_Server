@@ -22,5 +22,5 @@ export default function App() {
         socket.on("hi", (data) => console.log(data)); // 서버 -> 클라이언트
     };
 
-    return <button onClick={onSocket}>socket 통신 시작</button>;
+    return <button onClick={onSocket}>일시정지</button>;
 }
