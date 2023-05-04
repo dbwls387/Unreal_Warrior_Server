@@ -2,22 +2,29 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 export default function PlayerListComponent() {
-	const [list, setList] = useState();
+	const [list, setList] = useState([]);
+	const [sockets, setSocket] = useState();
 
-	const socket = io("https://k8e202.p.ssafy.io", {
-		path: "/socket.io",
-		// transports: ["websocket"],
-	});
-	socket.on("actor_status", data => {
-		setList(data);
-		console.log(list);
-	});
+	useEffect(() => {
+		const socket = io("https://k8e202.p.ssafy.io", {
+			path: "/socket.io",
+			cors: {
+				origin: "http://localhost:8080",
+				credentials: true,
+			},
+			// transports: ["websocket"],
+		});
 
-	// useEffect(() => {
-	// 	setList(data);
-	// 	console.log(list);
-	// 	console.log(data);
-	// }, [data]);
+		socket.on("actor_status", data => {
+			setList(data);
+			console.log("onList: ", list);
+			console.log("data: ", data);
+		});
+
+		setSocket(socket);
+		console.log("sockets: ", sockets);
+		console.log("list: ", list);
+	}, []);
 
 	return (
 		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">
