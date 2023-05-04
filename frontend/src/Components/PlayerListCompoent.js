@@ -23,72 +23,61 @@ export default function PlayerListComponent() {
 		});
 	}, []);
 
-	useEffect(() => {
-		console.log("list");
-		console.log(list);
-	}, [list]);
-
 	return (
 		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">
-			<thead>
-				<tr>
-					<th scope="col">플레이어 명</th>
-					<th scope="col">위치</th>
-					<th scope="col">hp</th>
-				</tr>
-			</thead>
-			{list.map(player => {
-				return (
-					<div key={player.actorName}>
-						{player.actorName.includes("player") && (
-							<table table className="table w-full">
-								<tbody>
-									<tr>
-										<th scope="row">{player.actorName}</th>
-										<td>(142, 254, 356)</td>
-										<td>{player.hp}</td>
-									</tr>
-								</tbody>
-							</table>
-						)}
-						{/* <table table className="table w-full">
-							<tbody>
-								<tr>
-									<th scope="row">{player.actorName}</th>
-									<td>(142, 254, 356)</td>
-									<td>{player.hp}</td>
-								</tr>
-							</tbody>
-						</table> */}
-					</div>
-				);
-			})}
-			{/* <table className="table w-full">
-				<thead>
+			<table table className="table-auto w-full">
+				<thead className="bg-slate-500">
 					<tr>
-						<th scope="col">플레이어 명</th>
-						<th scope="col">위치</th>
-						<th scope="col">hp</th>
+						<th
+							scope="col"
+							className="px-3 py-3 text-center text-sm font-medium text-white uppercase tracking-wider"
+						>
+							플레이어 명
+						</th>
+						<th
+							scope="col"
+							className="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider"
+						>
+							위치
+						</th>
+						<th
+							scope="col"
+							className="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider"
+						>
+							hp
+						</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">player1</th>
-						<td>(142, 254, 356)</td>
-						<td>100</td>
-					</tr>
-					<tr>
-						<th scope="row">player2</th>
-						<td>(142, 254, 356)</td>
-						<td>80</td>
-					</tr>
-					<tr>
-						<th scope="row">player3</th>
-						<td>(142, 254, 356)</td>
-						<td>60</td>
-					</tr>
-				</tbody>
-			</table> */}
+				{list.map(player => {
+					const location = "(" + player.x + ", " + player.y + ")";
+
+					return (
+						<>
+							{player.actorName.includes("player") && (
+								<tbody
+									key={player.actorName}
+									className="bg-white divide-y divide-gray-200"
+								>
+									<tr>
+										<th
+											scope="row"
+											className="px-4 py-3 whitespace-nowrap"
+										>
+											{player.actorName}
+										</th>
+										<td className="px-4 py-3 whitespace-nowrap">
+											{location}
+										</td>
+										<td className="px-4 py-3 whitespace-nowrap">
+											{player.hp}
+										</td>
+									</tr>
+								</tbody>
+							)}
+						</>
+					);
+				})}
+			</table>
 		</div>
 	);
 }
