@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+body {
+	height: 100vh;
+	width: 100%;
+	/* background-image: url('https://dbdzm869oupei.cloudfront.net/img/vinylrugs/preview/76458.png'); */
+}
+#root {
+	width: 100%;
+	height: 100%;
+}
+.main {
+	height: 90%;
+	width: 90%;
+	margin: auto;
+	margin-top: 50px;
+	background-color: white;
+}
+
+.left {
+	width: 40%;
+	height: 100%;
+	float: left;
+}
+.right {
+	width: 60%;
+	height: 100%;
+	float: right;
+	/* padding: 30px; */
+}
