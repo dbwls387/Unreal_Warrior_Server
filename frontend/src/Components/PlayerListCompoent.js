@@ -11,17 +11,15 @@ export default function PlayerListComponent() {
 		});
 
 		socket.on("actor_status", data => {
-			console.log("data: ", data.data);
 			setList(data.data);
-			console.log("onList: ", list);
 		});
 
 		console.log("list: ", list);
 	}, []);
 
-	useEffect(() => {
-		console.log(list);
-	}, [list]);
+	// useEffect(() => {
+	// 	console.log(list);
+	// }, [list]);
 
 	return (
 		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">
