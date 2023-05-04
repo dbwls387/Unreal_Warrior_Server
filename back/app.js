@@ -65,6 +65,7 @@ io.on("connection", (socket) => {
     socket.on("actor_status", (data) => {
         console.log("data: ", data);
         let inputData = {};
+        const data = data.data;
         for (let i = 0; i < data.length; i++) {
             const x = data[i].x;
             const y = data[i].y;
