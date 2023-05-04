@@ -64,24 +64,26 @@ io.on("connection", (socket) => {
 
     socket.on("actor_status", (data) => {
         console.log("data: ", data);
-        let inputData = {};
-        for (let i = 0; i < data.data.length; i++) {
-            const x = data.data[i].x;
-            const y = data.data[i].y;
-            const hp = data.data[i].hp;
+        if (data.data.length >= 16) {
+            let inputData = {};
+            for (let i = 0; i < data.data.length; i++) {
+                const x = data.data[i].x;
+                const y = data.data[i].y;
+                const hp = data.data[i].hp;
 
-            const xKey = "x" + (i + 1).toString();
-            const yKey = "y" + (i + 1).toString();
-            const hpKey = "hp" + (i + 1).toString();
-            
-            inputData[xKey] = x;
-            inputData[yKey] = y;
-            inputData[hpKey] = hp;
+                const xKey = "x" + (i + 1).toString();
+                const yKey = "y" + (i + 1).toString();
+                const hpKey = "hp" + (i + 1).toString();
+                
+                inputData[xKey] = x;
+                inputData[yKey] = y;
+                inputData[hpKey] = hp;
+            }
+            console.log(inputData);
+            loadModel(inputData).then(result => {
+                socket.broadcast.emit("win_rate", result);
+            });
         }
-        console.log(inputData);
-        loadModel(inputData).then(result => {
-            socket.broadcast.emit("win_rate", result);
-        });
     });
 
     socket.on("sim_control", (data) => {
