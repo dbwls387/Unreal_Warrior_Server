@@ -11,6 +11,7 @@ export default function PlayerListComponent() {
 	});
 	socket.on("actor_status", data => {
 		setList(data);
+		console.log(list);
 	});
 
 	// useEffect(() => {
