@@ -19,6 +19,10 @@ export default function PlayerListComponent() {
 		console.log("list: ", list);
 	}, []);
 
+	useEffect(() => {
+		console.log(list);
+	}, [list]);
+
 	return (
 		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">
 			<table className="table w-full">
