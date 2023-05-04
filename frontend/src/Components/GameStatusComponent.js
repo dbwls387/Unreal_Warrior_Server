@@ -10,6 +10,11 @@ export default function GameStatusComponent() {
 
 		const socket = io("https://k8e202.p.ssafy.io", {
 			path: "/socket.io",
+			cors: {
+				origin: "*",
+				credentials: true,
+			},
+
 			// transports: ["websocket"],
 		});
 
