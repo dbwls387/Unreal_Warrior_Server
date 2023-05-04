@@ -6,11 +6,16 @@ const port = process.env.PORT || 8080;
 const tf = require("@tensorflow/tfjs-node");
 const path = require("path");
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 async function loadModel(inputData) {
     const model = await tf.loadLayersModel(
         "file://" + path.join(__dirname, "model.json")
     );
      // 입력 데이터 정의
+    console.log(inputData);
     var as = Object.keys(inputData).map(key => inputData[key]);
 
      // 현재(일시적)의 데이터만을 입력으로 받는다면 아래와 같은 형식을 가지지만, 이전의 과거 데이터까지 포함된다면 달라져야함
@@ -43,8 +48,9 @@ app.get("/", (req, res) => {
 // });
 
 app.post("/model", (req, res) => {
-    loadModel(res.req.body).then(result => {
-    res.send(result);
+    console.log(req.body)
+    loadModel(req.body).then(result => {
+        res.send(result);
     });
 });
 
