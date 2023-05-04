@@ -21,7 +21,7 @@ export default function GameStatusComponent() {
 	return (
 		<div className="h-28 p-2 w-full">
 			<div className="float-left m-4 ml-10 font-bold">
-				<div>서버 연결 상태 : 연결완료</div>
+				<div>게임 연결 상태 : 연결완료</div>
 			</div>
 
 			<div className="float-right w-60 mr-4">
