@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
         }
         console.log(inputData);
         loadModel(inputData).then(result => {
-            socket.braodcast.meit("win_rate", result);
+            socket.braodcast.emit("win_rate", result);
         });
     });
 
