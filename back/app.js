@@ -73,6 +73,10 @@ io.on("connection", (socket) => {
             const xKey = "x" + (i + 1).toString();
             const yKey = "y" + (i + 1).toString();
             const hpKey = "hp" + (i + 1).toString();
+
+            console.log("x : ", x);
+            console.log("y : ", y);
+            console.log("hp : ", hp);
             
             inputData[xKey] = x;
             inputData[yKey] = y;
