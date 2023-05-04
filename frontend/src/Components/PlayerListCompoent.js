@@ -1,6 +1,6 @@
 export default function PlayerListComponent() {
 	return (
-		<div className="w-full h-[650px] mt-5 border-4 border-slate-500 rounded-lg">
+		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">
 			<table className="table w-full">
 				<thead>
 					<tr>
