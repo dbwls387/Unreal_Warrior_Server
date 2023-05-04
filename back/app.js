@@ -79,7 +79,7 @@ io.on("connection", (socket) => {
             inputData[hpKey] = hp;
         }
         console.log(inputData);
-        loadModel(inputData.body).then(result => {
+        loadModel(inputData).then(result => {
             socket.braodcast.meit("win_rate", result);
         });
     });
