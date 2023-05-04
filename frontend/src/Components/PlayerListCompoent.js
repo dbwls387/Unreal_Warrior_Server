@@ -1,4 +1,21 @@
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+
 export default function PlayerListComponent() {
+	const [list, setList] = useState();
+
+	const socket = io("https://k8e202.p.ssafy.io", {
+		path: "/socket.io",
+		// transports: ["websocket"],
+	});
+	const data = socket.on("actor_status");
+
+	useEffect(() => {
+		setList(data);
+		console.log(list);
+		console.log(data);
+	}, [data]);
+
 	return (
 		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">
 			<table className="table w-full">
