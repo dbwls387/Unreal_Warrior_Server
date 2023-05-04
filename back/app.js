@@ -63,8 +63,23 @@ io.on("connection", (socket) => {
     });
 
     socket.on("actor_status", (data) => {
-        io.emit("actor_status", data);
-        console.log("actor_status; ", data);
+        let inputData = {};
+        for (let i = 0; i < data.length; i++) {
+            const x = data[i].x;
+            const y = data[i].y;
+            const hp = data[i].hp;
+
+            const xKey = "x" + (i + 1).toString();
+            const yKey = "y" + (i + 1).toString();
+            const hpKey = "hp" + (i + 1).toString();
+            
+            inputData[xKey] = x;
+            inputData[yKey] = y;
+            inputData[hpKey] = hp;
+        }
+        const result = loadModel(inputData);
+        socket.broadcast.emit("actor_status", result);
+        console.log("actor_status; ", result);
     });
 
     socket.on("sim_control", (data) => {
