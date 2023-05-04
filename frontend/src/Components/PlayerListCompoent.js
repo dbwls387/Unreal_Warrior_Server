@@ -8,13 +8,16 @@ export default function PlayerListComponent() {
 		path: "/socket.io",
 		// transports: ["websocket"],
 	});
-	const data = socket.on("actor_status");
-
-	useEffect(() => {
+	socket.on("actor_status", data => {
 		setList(data);
 		console.log(list);
-		console.log(data);
-	}, [data]);
+	});
+
+	// useEffect(() => {
+	// 	setList(data);
+	// 	console.log(list);
+	// 	console.log(data);
+	// }, [data]);
 
 	return (
 		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">
