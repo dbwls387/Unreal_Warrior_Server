@@ -5,6 +5,8 @@ export default function PlayerListComponent() {
 	const [list, setList] = useState([]);
 
 	useEffect(() => {
+		let copy = [...list];
+
 		const socket = io("https://k8e202.p.ssafy.io", {
 			path: "/socket.io",
 			cors: {
@@ -16,19 +18,52 @@ export default function PlayerListComponent() {
 		});
 
 		socket.on("actor_status", data => {
-			setList(data.data);
+			copy = data.data;
+			setList(copy);
 		});
-
-		console.log("list: ", list);
 	}, []);
 
 	useEffect(() => {
+		console.log("list");
 		console.log(list);
 	}, [list]);
 
 	return (
 		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">
-			<table className="table w-full">
+			<thead>
+				<tr>
+					<th scope="col">플레이어 명</th>
+					<th scope="col">위치</th>
+					<th scope="col">hp</th>
+				</tr>
+			</thead>
+			{list.map(player => {
+				return (
+					<div key={player.actorName}>
+						{player.actorName.includes("player") && (
+							<table table className="table w-full">
+								<tbody>
+									<tr>
+										<th scope="row">{player.actorName}</th>
+										<td>(142, 254, 356)</td>
+										<td>{player.hp}</td>
+									</tr>
+								</tbody>
+							</table>
+						)}
+						{/* <table table className="table w-full">
+							<tbody>
+								<tr>
+									<th scope="row">{player.actorName}</th>
+									<td>(142, 254, 356)</td>
+									<td>{player.hp}</td>
+								</tr>
+							</tbody>
+						</table> */}
+					</div>
+				);
+			})}
+			{/* <table className="table w-full">
 				<thead>
 					<tr>
 						<th scope="col">플레이어 명</th>
@@ -53,7 +88,7 @@ export default function PlayerListComponent() {
 						<td>60</td>
 					</tr>
 				</tbody>
-			</table>
+			</table> */}
 		</div>
 	);
 }
