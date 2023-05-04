@@ -78,8 +78,8 @@ io.on("connection", (socket) => {
             inputData[hpKey] = hp;
         }
         const result = loadModel(inputData);
-        socket.broadcast.emit("actor_status", result);
-        console.log("actor_status; ", result);
+        socket.broadcast.emit("win_rate", result);
+        console.log("win_rate ", result);
     });
 
     socket.on("sim_control", (data) => {
