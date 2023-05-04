@@ -65,11 +65,10 @@ io.on("connection", (socket) => {
     socket.on("actor_status", (data) => {
         console.log("data: ", data);
         let inputData = {};
-        const data = data.data;
-        for (let i = 0; i < data.length; i++) {
-            const x = data[i].x;
-            const y = data[i].y;
-            const hp = data[i].hp;
+        for (let i = 0; i < data.data.length; i++) {
+            const x = data.data[i].x;
+            const y = data.data[i].y;
+            const hp = data.data[i].hp;
 
             const xKey = "x" + (i + 1).toString();
             const yKey = "y" + (i + 1).toString();
