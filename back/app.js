@@ -81,6 +81,7 @@ io.on("connection", (socket) => {
             }
             console.log(inputData);
             loadModel(inputData).then(result => {
+                socket.broadcast.emit("actor_status", data);
                 socket.broadcast.emit("win_rate", result);
             });
         }
