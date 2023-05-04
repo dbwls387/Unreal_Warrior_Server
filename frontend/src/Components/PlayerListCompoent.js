@@ -7,13 +7,17 @@ export default function PlayerListComponent() {
 
 	const socket = io("https://k8e202.p.ssafy.io", {
 		path: "/socket.io",
+		cors: {
+			origin: "http://localhost:3000",
+			credentials: true,
+		},
 		// transports: ["websocket"],
 	});
 
 	socket.on("actor_status", data => {
-		// setList(data);
-		// console.log("onList: ", list);
-		console.log("data: ", data);
+		console.log("data: ", data.data);
+		setList(data.data);
+		console.log("onList: ", list);
 	});
 
 	// useEffect(() => {
