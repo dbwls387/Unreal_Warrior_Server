@@ -78,11 +78,10 @@ io.on("connection", (socket) => {
             inputData[yKey] = y;
             inputData[hpKey] = hp;
         }
-        console.log(inputData);3
+        console.log(inputData);
         loadModel(inputData.body).then(result => {
             socket.braodcast.meit("win_rate", result);
         });
-        console.log("win_rate ", result);
     });
 
     socket.on("sim_control", (data) => {
