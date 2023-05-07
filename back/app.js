@@ -135,6 +135,8 @@ io.on("connection", (socket) => {
                         results["indi"].push(t);
                     }
 
+                    console.log(results);                    
+
                     socket.broadcast.emit("actor_status", data);
                     socket.broadcast.emit("win_rate", result);
                     socket.broadcast.emit("direction", results);
