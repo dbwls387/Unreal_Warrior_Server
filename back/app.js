@@ -15,6 +15,12 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let playerNumber = -1;
+
+// delta
+const dx = [ 1, 1, 0, -1, -1, -1, 0, 1 ];
+const dy = [ 0, -1, -1, -1, 0, 1, 1, 1 ]
+
 async function loadModel(inputData) {
     const model = await tf.loadLayersModel(
         "file://" + path.join(__dirname, "model.json")
@@ -58,6 +64,15 @@ app.post("/model", (req, res) => {
 });
 
 io.on("connection", socket => {
+app.post("/showPlayer", (req, res) => {
+    playerNumber = req.body.playerNumber;
+});
+
+app.get("/hidePlayer", (req, res) => {
+    playerNumber = -1;
+});
+
+io.on("connection", (socket) => {
     console.log("Connected!");
 
     socket.on("chat message", msg => {
@@ -69,10 +84,12 @@ io.on("connection", socket => {
         console.log("data: ", data);
         if (data.data.length >= 16) {
             let inputData = {};
+            let disArray = [];
             for (let i = 0; i < data.data.length; i++) {
                 const x = data.data[i].x;
                 const y = data.data[i].y;
                 const hp = data.data[i].hp;
+                const dis = data.data[i].dis;
 
                 const xKey = "x" + (i + 1).toString();
                 const yKey = "y" + (i + 1).toString();
@@ -81,12 +98,54 @@ io.on("connection", socket => {
                 inputData[xKey] = x;
                 inputData[yKey] = y;
                 inputData[hpKey] = hp;
+
+                disArray.push(dis);
             }
+
             console.log(inputData);
-            loadModel(inputData).then(result => {
-                socket.broadcast.emit("actor_status", data);
-                socket.broadcast.emit("win_rate", result);
-            });
+            console.log(disArray);
+
+            if (playerNumber == -1) {
+                loadModel(inputData).then(result => {
+                    socket.broadcast.emit("actor_status", data);
+                    socket.broadcast.emit("win_rate", result);
+                });   
+            } else if (playerNumber >= 0 && playerNumber <= 7) {
+                loadModel(inputData).then(result => {
+                    const results = {};
+                    results["totalResult"] = result;
+
+                    return results;
+                }).then(results => async function(result) {
+                    results["indi"] = [];
+
+                    let x = data.data[playerNumber].x;
+                    let y = data.data[playerNumber].y;
+
+                    for (let d = 0; d < 8; d++) {
+                        let nx = x + dx[d] * disArray[playerNumber];
+                        let ny = y + dy[d] * disArray[playerNumber];
+
+                        inputData["x" + playerNumber.toString()] = nx;
+                        inputData["y" + playerNumber.toString()] = ny;
+
+                        const result2 = await loadModel(inputData);
+
+                        const t = {};
+                        t["nx"] = nx;
+                        t["ny"] = ny;
+                        t["win"] = result2[1];
+
+                        results["indi"].push(t);
+                    }
+
+                    socket.broadcast.emit("actor_status", data);
+                    socket.broadcast.emit("win_rate", result);
+                    socket.broadcast.emit("direction", results);
+                });
+            } else {
+                console.error("playerNumber가 잘못함");
+            }
         }
     });
 
