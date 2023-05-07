@@ -102,7 +102,7 @@ io.on("connection", (socket) => {
             console.log(disArray);
 
             if (playerNumber == -1) {
-                // const result = await loadModel(inputData);
+                const result = await loadModel(inputData);
                 console.log(result);
                 // await socket.broadcast.emit("actor_status", data);
                 // await socket.broadcast.emit("win_rate", result);
