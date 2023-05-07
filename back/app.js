@@ -108,7 +108,6 @@ io.on("connection", (socket) => {
             } else if (playerNumber >= 0 && playerNumber <= 7) {
                 const result = await loadModel(inputData);
                 const results = {};
-                results["totalResult"] = result;
 
                 results["indi"] = [];
 
