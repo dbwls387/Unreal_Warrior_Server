@@ -66,7 +66,7 @@ app.post("/model", (req, res) => {
 io.on("connection", socket => {
 app.post("/showPlayer", (req, res) => {
     playerNumber = req.body.playerNumber;
-});
+})});
 
 app.get("/hidePlayer", (req, res) => {
     playerNumber = -1;
@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
         console.log(msg);
     });
 
-    socket.on("actor_status", data => {
+    socket.on("actor_status", async (data) => {
         console.log("data: ", data);
         if (data.data.length >= 16) {
             let inputData = {};
@@ -106,45 +106,42 @@ io.on("connection", (socket) => {
             console.log(disArray);
 
             if (playerNumber == -1) {
-                loadModel(inputData).then(result => {
-                    socket.broadcast.emit("actor_status", data);
-                    socket.broadcast.emit("win_rate", result);
-                });   
+                const result = await loadModel(inputData);
+                socket.broadcast.emit("actor_status", data);
+                socket.broadcast.emit("win_rate", result);
             } else if (playerNumber >= 0 && playerNumber <= 7) {
-                loadModel(inputData).then(result => {
-                    const results = {};
-                    results["totalResult"] = result;
+                const result = await loadModel(inputData);
+                const results = {};
+                results["totalResult"] = result;
 
-                    return results;
-                }).then(results => async function(result) {
-                    results["indi"] = [];
+                results["indi"] = [];
 
-                    let x = data.data[playerNumber].x;
-                    let y = data.data[playerNumber].y;
+                let x = data.data[playerNumber].x;
+                let y = data.data[playerNumber].y;
 
-                    for (let d = 0; d < 8; d++) {
-                        let nx = x + dx[d] * disArray[playerNumber];
-                        let ny = y + dy[d] * disArray[playerNumber];
+                for (let d = 0; d < 8; d++) {
+                    let nx = x + dx[d] * disArray[playerNumber];
+                    let ny = y + dy[d] * disArray[playerNumber];
 
-                        inputData["x" + playerNumber.toString()] = nx;
-                        inputData["y" + playerNumber.toString()] = ny;
+                    inputData["x" + playerNumber.toString()] = nx;
+                    inputData["y" + playerNumber.toString()] = ny;
 
-                        const result2 = await loadModel(inputData);
+                    const result2 = await loadModel(inputData);
 
-                        const t = {};
-                        t["nx"] = nx;
-                        t["ny"] = ny;
-                        t["win"] = result2[1];
+                    const t = {};
+                    t["nx"] = nx;
+                    t["ny"] = ny;
+                    t["win"] = result2[1];
 
-                        results["indi"].push(t);
-                    }
+                    results["indi"].push(t);
 
                     console.log(results);                    
 
                     socket.broadcast.emit("actor_status", data);
                     socket.broadcast.emit("win_rate", result);
                     socket.broadcast.emit("direction", results);
-                });
+                
+                }
             } else {
                 console.error("playerNumber가 잘못함");
             }
