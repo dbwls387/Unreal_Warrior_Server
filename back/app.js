@@ -66,10 +66,12 @@ app.post("/model", (req, res) => {
 io.on("connection", socket => {
 app.post("/showPlayer", (req, res) => {
     playerNumber = req.body.playerNumber;
+    console.log("playerNumber : " + playerNumber);
 })});
 
 app.get("/hidePlayer", (req, res) => {
     playerNumber = -1;
+    console.log("playerNumber : " + playerNumber);
 });
 
 io.on("connection", (socket) => {
