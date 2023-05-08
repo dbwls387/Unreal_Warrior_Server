@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 export default function PlayerDetail(props) {
-	const [detail, setDetail] = useState([]);
+	const [list, setList] = useState([]);
 	const id = props.playerId.substr(6);
 
 	useEffect(() => {
@@ -18,6 +19,28 @@ export default function PlayerDetail(props) {
 				console.log(err);
 			});
 	}, []);
+
+	useEffect(() => {
+		let copy = [...list];
+
+		const socket = io("https://k8e202.p.ssafy.io", {
+			path: "/socket.io",
+			cors: {
+				origin: "*",
+				credentials: true,
+			},
+		});
+
+		socket.on("direction", data => {
+			console.log(data);
+			copy = data.data;
+			setList(copy);
+		});
+	}, []);
+
+	useEffect(() => {
+		console.log(list);
+	});
 
 	return (
 		<div>
