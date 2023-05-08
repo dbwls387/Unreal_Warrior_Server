@@ -19,7 +19,7 @@ export default function ProgressbarComponent() {
 	}, []);
 
 	useEffect(() => {
-		console.log(list);
+		// console.log(list);
 	}, [list]);
 
 	return (

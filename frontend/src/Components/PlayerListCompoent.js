@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 
 export default function PlayerListComponent() {
 	const [list, setList] = useState([]);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		let copy = [...list];
@@ -56,21 +58,17 @@ export default function PlayerListComponent() {
 							{player.actorName.includes("player") && (
 								<tbody
 									key={player.actorName}
-									className="bg-white divide-y divide-gray-200"
+									className="bg-white divide-y divide-gray-200 cursor-pointer"
+									onClick={() => {
+										navigate(`/detail/${player.actorName}`);
+									}}
 								>
 									<tr>
-										<th
-											scope="row"
-											className="px-4 py-3 whitespace-nowrap"
-										>
+										<th scope="row" className="px-4 py-3 whitespace-nowrap">
 											{player.actorName}
 										</th>
-										<td className="px-4 py-3 whitespace-nowrap">
-											{location}
-										</td>
-										<td className="px-4 py-3 whitespace-nowrap">
-											{player.hp}
-										</td>
+										<td className="px-4 py-3 whitespace-nowrap">{location}</td>
+										<td className="px-4 py-3 whitespace-nowrap">{player.hp}</td>
 									</tr>
 								</tbody>
 							)}
