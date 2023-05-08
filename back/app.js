@@ -21,7 +21,6 @@ async function loadModel(inputData) {
         "file://" + path.join(__dirname, "model.json")
     );
      // 입력 데이터 정의
-    console.log(inputData);
     var as = Object.keys(inputData).map(key => inputData[key]);
 
      // 현재(일시적)의 데이터만을 입력으로 받는다면 아래와 같은 형식을 가지지만, 이전의 과거 데이터까지 포함된다면 달라져야함
@@ -36,7 +35,6 @@ async function loadModel(inputData) {
     prediction.print();
 
     const result = await prediction.array();
-    console.log("dtdat", result[0]);
     return result[0];
 }
 
@@ -54,7 +52,6 @@ app.get("/", (req, res) => {
 // });
 
 app.post("/model", (req, res) => {
-    console.log(req.body)
     loadModel(req.body).then(result => {
         res.send(result);
     });
@@ -62,20 +59,15 @@ app.post("/model", (req, res) => {
 
 app.post("/showPlayer", (req, res) => {
     playerNumber = req.body.playerNumber;
-    console.log("playerNumber : " + playerNumber);
 });
 
 app.get("/hidePlayer", (req, res) => {
     playerNumber = -1;
-    console.log("playerNumber : " + playerNumber);
 });
 
 io.on("connection", (socket) => {
-    console.log("Connected!");
-
     socket.on("chat message", (msg) => {
         io.emit("chat message", msg);
-        console.log(msg);
     });
 
     socket.on("actor_status", async (data) => {
