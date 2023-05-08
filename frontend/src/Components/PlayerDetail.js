@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 
 export default function PlayerDetail(props) {
 	const [list, setList] = useState([]);
+	const [detail, setDetail] = useState([]);
 	const id = props.playerId.substr(6);
 
 	useEffect(() => {
@@ -22,6 +23,7 @@ export default function PlayerDetail(props) {
 
 	useEffect(() => {
 		let copy = [...list];
+		let detailCopy = [...detail];
 
 		const socket = io("https://k8e202.p.ssafy.io", {
 			path: "/socket.io",
@@ -32,15 +34,20 @@ export default function PlayerDetail(props) {
 		});
 
 		socket.on("direction", data => {
-			console.log(data);
-			copy = data.data;
+			// console.log(data);
+			copy = data.indi;
 			setList(copy);
+		});
+
+		socket.on("actor_status", data => {
+			detailCopy = data.data;
+			setDetail(detailCopy);
 		});
 	}, []);
 
 	useEffect(() => {
-		console.log(list);
-	});
+		console.log(detail);
+	}, [detail]);
 
 	return (
 		<div>
