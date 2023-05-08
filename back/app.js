@@ -32,7 +32,7 @@ async function loadModel(inputData) {
     const prediction = model.predict(tensorData);
 
     // 결과 출력
-    prediction.print();
+    // prediction.print();
 
     const result = await prediction.array();
     return result[0];
