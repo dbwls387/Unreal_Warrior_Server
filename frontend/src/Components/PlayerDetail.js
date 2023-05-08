@@ -4,23 +4,24 @@ import { io } from "socket.io-client";
 
 export default function PlayerDetail(props) {
 	const [list, setList] = useState([]);
-	const [detail, setDetail] = useState();
+	const [detail, setDetail] = useState([]);
 	const id = props.playerId.substr(6);
 
+	// axios
 	useEffect(() => {
 		axios
 			.post("https://k8e202.p.ssafy.io/api/showPlayer", {
 				playerNumber: id,
 			})
 			.then(res => {
-				// setDetail(res);
-				console.log(res);
+				// console.log(res);
 			})
 			.catch(function (err) {
 				console.log(err);
 			});
 	}, []);
 
+	// socket on
 	useEffect(() => {
 		let copy = [...list];
 		let detailCopy = [...detail];
@@ -34,26 +35,21 @@ export default function PlayerDetail(props) {
 		});
 
 		socket.on("direction", data => {
-			// console.log(data);
 			copy = data.indi;
 			setList(copy);
 		});
 
 		socket.on("actor_status", data => {
-			console.log(data.data);
 			data.data?.map(p => {
-				if (p.playerName === props.playerId) {
-					detailCopy = p;
+				if (p.actorName === props.playerId) {
+					detailCopy[0] = p.x;
+					detailCopy[1] = p.y;
+					detailCopy[2] = p.hp;
 					setDetail(detailCopy);
-					console.log(detail);
 				}
 			});
 		});
 	}, []);
-
-	useEffect(() => {
-		// console.log(detail);
-	}, [detail]);
 
 	return (
 		<div>
@@ -71,7 +67,7 @@ export default function PlayerDetail(props) {
 								scope="col"
 								className="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider"
 							>
-								위치
+								현재 위치
 							</th>
 							<th
 								scope="col"
@@ -86,8 +82,10 @@ export default function PlayerDetail(props) {
 							<th scope="row" className="px-4 py-3 whitespace-nowrap">
 								{props.playerId}
 							</th>
-							<td className="px-4 py-3 whitespace-nowrap"></td>
-							<td className="px-4 py-3 whitespace-nowrap"></td>
+							<td className="px-4 py-3 whitespace-nowrap">
+								({detail[0]}, {detail[1]})
+							</td>
+							<td className="px-4 py-3 whitespace-nowrap">{detail[2]}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -108,14 +106,24 @@ export default function PlayerDetail(props) {
 							>
 								승률
 							</th>
-							<th
-								scope="col"
-								className="px-6 py-3 text-left text-sm font-medium text-white uppercase tracking-wider"
-							>
-								이동
-							</th>
 						</tr>
 					</thead>
+
+					{list.map(dir => {
+						return (
+							<tbody key={dir.nx} className="bg-white divide-y divide-gray-200">
+								<tr>
+									<td className="px-4 py-3 whitespace-nowrap">
+										({Math.floor(dir.nx * 10) / 10.0},{" "}
+										{Math.floor(dir.ny * 10) / 10.0})
+									</td>
+									<td className="px-4 py-3 whitespace-nowrap">
+										{Math.round(dir.win * 10000) / 10000.0} %
+									</td>
+								</tr>
+							</tbody>
+						);
+					})}
 				</table>
 			</div>
 		</div>
