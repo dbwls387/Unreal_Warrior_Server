@@ -40,17 +40,19 @@ export default function PlayerDetail(props) {
 		});
 
 		socket.on("actor_status", data => {
-			data.data.map(p => {
+			console.log(data.data);
+			data.data?.map(p => {
 				if (p.playerName === props.playerId) {
 					detailCopy = p;
 					setDetail(detailCopy);
+					console.log(detail);
 				}
 			});
 		});
 	}, []);
 
 	useEffect(() => {
-		console.log(detail);
+		// console.log(detail);
 	}, [detail]);
 
 	return (
