@@ -66,10 +66,7 @@ app.get("/hidePlayer", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-    socket.on("chat message", (msg) => {
-        io.emit("chat message", msg);
-    });
-
+    console.log(socket);
     socket.on("actor_status", async (data) => {
         if (data.data.length >= 16) {
             let inputData = {};
@@ -134,6 +131,10 @@ io.on("connection", (socket) => {
     socket.on("sim_control", (data) => {
         io.emit("sim_control", data);
         console.log("sim_control: ", data);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("disconnected");
     });
 });
 
