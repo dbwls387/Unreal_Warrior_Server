@@ -32,7 +32,7 @@ export default function Main() {
 			<div className="right" >
 				{/* <button className="download" onClick={downLoadUnreal}>DownLoad</button> */}
 				{/* <UnrealComponent /> */}
-				<a href="http://naver.me/GLAd3yfe">Download2</a>
+				<a href="http://naver.me/xM8yCjI7">Download2</a>
 			</div>
 		</div>
 	);
