@@ -65,7 +65,7 @@ app.get("/hidePlayer", (req, res) => {
 
 io.on("connection", socket => {
     console.log(socket.id);
-    console.log(socket);
+    // console.log(socket);
     socket.on("actor_status", async data => {
         if (data.data.length >= 16) {
             let inputData = {};
