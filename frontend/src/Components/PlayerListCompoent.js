@@ -5,25 +5,24 @@ import { io } from "socket.io-client";
 export default function PlayerListComponent() {
 	const [list, setList] = useState([]);
 	const navigate = useNavigate();
+	// const socket = io("https://k8e202.p.ssafy.io", {
+	// 	path: "/socket.io",
+	// 	cors: {
+	// 		origin: "*",
+	// 		credentials: true,
+	// 	},
 
-	useEffect(() => {
-		let copy = [...list];
+	// 	// transports: ["websocket"],
+	// });
 
-		const socket = io("https://k8e202.p.ssafy.io", {
-			path: "/socket.io",
-			cors: {
-				origin: "*",
-				credentials: true,
-			},
+	// useEffect(() => {
+	// 	let copy = [...list];
 
-			// transports: ["websocket"],
-		});
-
-		socket.on("actor_status", data => {
-			copy = data.data;
-			setList(copy);
-		});
-	}, []);
+	// 	socket.on("actor_status", data => {
+	// 		copy = data.data;
+	// 		setList(copy);
+	// 	});
+	// }, []);
 
 	return (
 		<div className="w-full h-[450px] mt-5 border-4 border-slate-500 rounded-lg">

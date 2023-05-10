@@ -5,21 +5,21 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
 
 export default function GameStatusComponent() {
-	function onSocket(state) {
-		console.log(state);
+	// function onSocket(state) {
+	// 	console.log(state);
 
-		const socket = io("https://k8e202.p.ssafy.io", {
-			path: "/socket.io",
-			cors: {
-				origin: "*",
-				credentials: true,
-			},
+	// 	const socket = io("https://k8e202.p.ssafy.io", {
+	// 		path: "/socket.io",
+	// 		cors: {
+	// 			origin: "*",
+	// 			credentials: true,
+	// 		},
 
-			// transports: ["websocket"],
-		});
+	// 		// transports: ["websocket"],
+	// 	});
 
-		socket.emit("sim_control", state);
-	}
+	// 	socket.emit("sim_control", state);
+	// }
 
 	return (
 		<div className="h-28 p-2 w-full">
@@ -31,7 +31,7 @@ export default function GameStatusComponent() {
 				<div
 					className="float-left w-1/3 text-center cursor-pointer"
 					onClick={() => {
-						onSocket("pause");
+						// onSocket("pause");
 					}}
 				>
 					<PauseCircleOutlineIcon sx={{ fontSize: 50 }} />
@@ -39,7 +39,7 @@ export default function GameStatusComponent() {
 				<div
 					className="float-left w-1/3 text-center cursor-pointer"
 					onClick={() => {
-						onSocket("play");
+						// onSocket("play");
 					}}
 				>
 					<PlayCircleOutlineIcon sx={{ fontSize: 50 }} />
@@ -47,7 +47,7 @@ export default function GameStatusComponent() {
 				<div
 					className="float-left w-1/3 text-center cursor-pointer"
 					onClick={() => {
-						onSocket("stop");
+						// onSocket("stop");
 					}}
 				>
 					<StopCircleOutlinedIcon sx={{ fontSize: 50 }} />
