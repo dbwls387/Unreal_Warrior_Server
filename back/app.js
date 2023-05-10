@@ -13,20 +13,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let playerNumber = -1;
 
 // delta
-const dx = [ 1, 1, 0, -1, -1, -1, 0, 1 ];
-const dy = [ 0, -1, -1, -1, 0, 1, 1, 1 ]
+const dx = [1, 1, 0, -1, -1, -1, 0, 1];
+const dy = [0, -1, -1, -1, 0, 1, 1, 1];
 
 async function loadModel(inputData) {
     const model = await tf.loadLayersModel(
         "file://" + path.join(__dirname, "model.json")
     );
-     // 입력 데이터 정의
+    // 입력 데이터 정의
     var as = Object.keys(inputData).map(key => inputData[key]);
 
-     // 현재(일시적)의 데이터만을 입력으로 받는다면 아래와 같은 형식을 가지지만, 이전의 과거 데이터까지 포함된다면 달라져야함
-    const tensorData = tf.tensor3d(
-        as, [1, 1, 48]
-    );
+    // 현재(일시적)의 데이터만을 입력으로 받는다면 아래와 같은 형식을 가지지만, 이전의 과거 데이터까지 포함된다면 달라져야함
+    const tensorData = tf.tensor3d(as, [1, 1, 48]);
 
     // 예측 수행
     const prediction = model.predict(tensorData);
@@ -43,7 +41,7 @@ app.get("/", (req, res) => {
     console.error("이거왜안대");
 });
 
-// get 으로 딥러닝 모델이 있는지만, 작동하는지만 확인용 
+// get 으로 딥러닝 모델이 있는지만, 작동하는지만 확인용
 // app.get("/model", (req, res) => {
 //     console.error("ㅇㅅㅇ");
 //     loadModel().then((result) => {
@@ -65,9 +63,10 @@ app.get("/hidePlayer", (req, res) => {
     playerNumber = -1;
 });
 
-io.on("connection", (socket) => {
+io.on("connection", socket => {
     console.log(socket.id);
-    socket.on("actor_status", async (data) => {
+    console.log(socket);
+    socket.on("actor_status", async data => {
         if (data.data.length >= 16) {
             let inputData = {};
             let disArray = [];
@@ -80,7 +79,7 @@ io.on("connection", (socket) => {
                 const xKey = "x" + (i + 1).toString();
                 const yKey = "y" + (i + 1).toString();
                 const hpKey = "hp" + (i + 1).toString();
-                
+
                 inputData[xKey] = x;
                 inputData[yKey] = y;
                 inputData[hpKey] = hp;
@@ -120,7 +119,6 @@ io.on("connection", (socket) => {
                     socket.broadcast.emit("actor_status", data);
                     socket.broadcast.emit("win_rate", result);
                     socket.broadcast.emit("direction", results);
-                
                 }
             } else {
                 console.error("playerNumber가 잘못함");
@@ -128,7 +126,7 @@ io.on("connection", (socket) => {
         }
     });
 
-    socket.on("sim_control", (data) => {
+    socket.on("sim_control", data => {
         io.emit("sim_control", data);
         console.log("sim_control: ", data);
     });
