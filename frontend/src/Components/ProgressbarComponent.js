@@ -3,19 +3,19 @@ import { io } from "socket.io-client";
 
 export default function ProgressbarComponent() {
 	const [list, setList] = useState([]);
-	// const socket = io("https://k8e202.p.ssafy.io", {
-	// 	path: "/socket.io",
-	// 	// transports: ["websocket"],
-	// });
+	const socket = io("https://k8e202.p.ssafy.io", {
+		path: "/socket.io",
+		// transports: ["websocket"],
+	});
 
-	// useEffect(() => {
-	// 	let copy = [...list];
+	useEffect(() => {
+		let copy = [...list];
 
-	// 	socket.on("win_rate", data => {
-	// 		copy = data;
-	// 		setList(copy);
-	// 	});
-	// }, []);
+		socket.on("win_rate", data => {
+			copy = data;
+			setList(copy);
+		});
+	}, []);
 
 	useEffect(() => {
 		// console.log(list);
