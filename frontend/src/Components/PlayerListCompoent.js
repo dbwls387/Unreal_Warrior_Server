@@ -15,6 +15,8 @@ export default function PlayerListComponent() {
 		// transports: ["websocket"],
 	});
 
+	console.log(socket);
+
 	useEffect(() => {
 		let copy = [...list];
 
