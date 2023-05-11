@@ -83,19 +83,17 @@ io.on("connection", socket => {
                 // await socket.broadcast.emit("win_rate", result);
             } else if (map.get(socketId) >= 0 && map.get(socketId) <= 7) {
                 const result = await loadModel(inputData);
-                const results = {};
+                const results = [];
 
-                results["indi"] = [];
-
-                let x = data.data[playerNumber].x;
-                let y = data.data[playerNumber].y;
+                let x = data.data[map.get(socketId)].x;
+                let y = data.data[map.get(socketId)].y;
 
                 for (let d = 0; d < 8; d++) {
-                    let nx = x + dx[d] * disArray[playerNumber];
-                    let ny = y + dy[d] * disArray[playerNumber];
+                    let nx = x + dx[d] * disArray[map.get(socketId)];
+                    let ny = y + dy[d] * disArray[map.get(socketId)];
 
-                    inputData["x" + playerNumber.toString()] = nx;
-                    inputData["y" + playerNumber.toString()] = ny;
+                    inputData["x" + map.get(socketId).toString()] = nx;
+                    inputData["y" + map.get(socketId).toString()] = ny;
 
                     const result2 = await loadModel(inputData);
 
@@ -104,16 +102,15 @@ io.on("connection", socket => {
                     t["ny"] = ny;
                     t["win"] = result2[1];
 
-                    results["indi"].push(t);
+                    results.push(t);
 
                     await io.to(socketId).emit("win_rate", result);
                     await io.to(socketId).emit("direction", results);
                     // socket.broadcast.emit("win_rate", result);
                     // socket.broadcast.emit("direction", results);
-
-                    console.log(results);
-                    console.log(result);
                 }
+
+                console.log(results);
             } else {
                 console.error("playerNumber가 잘못함");
             }
