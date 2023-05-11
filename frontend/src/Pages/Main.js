@@ -44,8 +44,8 @@ export default function Main() {
 					console.dir(stream);
 					console.dir(actions);
 				}}
-				// psHost="ws://127.0.0.1:80"
-				psHost="wss://k8e202.p.ssafy.io:80"
+				psHost="ws://127.0.0.1:80"
+				// psHost="wss://k8e202.p.ssafy.io"
 				psConfig={{
 					autoPlay: true,
 					autoConnect: true,
