@@ -8,6 +8,9 @@ import PlayerDetail from "../Components/PlayerDetail";
 // import FileSaver from "file-saver"
 import unreal from "../unreal/aiAvatarTest.exe";
 
+import { ButtonGroup, Button } from "rsuite";
+import { MetaProvider, MetaEditor, Hooks } from "pixel-streaming";
+
 export default function Main() {
 	const { playerId } = useParams();
 
@@ -18,21 +21,43 @@ export default function Main() {
 	// 	const exe = new Blob([unreal])
 	// 	FileSaver.saveAs(exe, filename)
 	// }
+
+	const Player = () => {
+		const actions = Hooks.actions();
+
+		return (
+			<MetaEditor
+				debugMode
+				showToolbar
+				psHost="wss://localhost:80"
+				psConfig={
+					{
+						// https://metaeditor.io/docs/metaeditor/settings/player
+					}
+				}
+			/>
+		);
+	};
+
 	return (
 		<div className="main">
-			<div className="left">
+			{/* <div className="left">
 				<ProgressbarComponent />
 
-				{/* 플레이어 전체보기 */}
+				플레이어 전체보기
 				{playerId === undefined && <PlayerListComponent />}
 				{playerId != undefined && <PlayerDetail playerId={playerId} />}
 			</div>
 
 			<div className="right">
-				{/* <button className="download" onClick={downLoadUnreal}>DownLoad</button> */}
+				<button className="download" onClick={downLoadUnreal}>DownLoad</button>
 				<UnrealComponent />
 				<a href="http://naver.me/xM8yCjI7">Download2</a>
-			</div>
+			</div> */}
+
+			<MetaProvider>
+				<Player />
+			</MetaProvider>
 		</div>
 	);
 }
