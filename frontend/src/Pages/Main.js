@@ -44,7 +44,7 @@ export default function Main() {
 					console.dir(stream);
 					console.dir(actions);
 				}}
-				psHost="ws://127.0.0.1:80"
+				psHost="ws://221.141.159.166:80"
 				psConfig={{
 					autoPlay: true,
 					autoConnect: true,
