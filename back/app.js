@@ -76,7 +76,7 @@ io.on("connection", socket => {
 
                 disArray.push(dis);
             }
- 
+
             if (map.get(socketId) == -1) {
                 const result = await loadModel(inputData);
                 await io.to(socketId).emit("win_rate", result);
@@ -117,7 +117,8 @@ io.on("connection", socket => {
         }
     });
 
-    socket.on("change_player", (data) => {
+    socket.on("change_player", data => {
+        console.log("change player: ", data);
         map.set(socketId, data);
     });
 
