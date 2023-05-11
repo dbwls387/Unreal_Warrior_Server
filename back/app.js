@@ -110,6 +110,9 @@ io.on("connection", socket => {
                     await io.to(socketId).emit("direction", results);
                     // socket.broadcast.emit("win_rate", result);
                     // socket.broadcast.emit("direction", results);
+
+                    console.log(results);
+                    console.log(result);
                 }
             } else {
                 console.error("playerNumber가 잘못함");
