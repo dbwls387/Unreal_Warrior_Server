@@ -8,48 +8,48 @@ export default function PlayerDetail(props) {
 	const id = props.playerId.substr(6);
 
 	// axios
-	useEffect(() => {
-		axios
-			.post("https://k8e202.p.ssafy.io/api/showPlayer", {
-				playerNumber: id,
-			})
-			.then(res => {
-				// console.log(res);
-			})
-			.catch(function (err) {
-				console.log(err);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	axios
+	// 		.post("https://k8e202.p.ssafy.io/api/showPlayer", {
+	// 			playerNumber: id,
+	// 		})
+	// 		.then(res => {
+	// 			// console.log(res);
+	// 		})
+	// 		.catch(function (err) {
+	// 			console.log(err);
+	// 		});
+	// }, []);
 
 	// socket on
-	useEffect(() => {
-		let copy = [...list];
-		let detailCopy = [...detail];
+	// useEffect(() => {
+	// 	let copy = [...list];
+	// 	let detailCopy = [...detail];
 
-		const socket = io("https://k8e202.p.ssafy.io", {
-			path: "/socket.io",
-			cors: {
-				origin: "*",
-				credentials: true,
-			},
-		});
+	// 	const socket = io("https://k8e202.p.ssafy.io", {
+	// 		path: "/socket.io",
+	// 		cors: {
+	// 			origin: "*",
+	// 			credentials: true,
+	// 		},
+	// 	});
 
-		socket.on("direction", data => {
-			copy = data.indi;
-			setList(copy);
-		});
+	// 	socket.on("direction", data => {
+	// 		copy = data.indi;
+	// 		setList(copy);
+	// 	});
 
-		socket.on("actor_status", data => {
-			data.data?.map(p => {
-				if (p.actorName === props.playerId) {
-					detailCopy[0] = p.x;
-					detailCopy[1] = p.y;
-					detailCopy[2] = p.hp;
-					setDetail(detailCopy);
-				}
-			});
-		});
-	}, []);
+	// 	socket.on("actor_status", data => {
+	// 		data.data?.map(p => {
+	// 			if (p.actorName === props.playerId) {
+	// 				detailCopy[0] = p.x;
+	// 				detailCopy[1] = p.y;
+	// 				detailCopy[2] = p.hp;
+	// 				setDetail(detailCopy);
+	// 			}
+	// 		});
+	// 	});
+	// }, []);
 
 	return (
 		<div>
