@@ -10,7 +10,9 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let playerNumber = -1;
+// let playerNumber = -1;
+
+let map = new Map();
 
 // delta
 const dx = [1, 1, 0, -1, -1, -1, 0, 1];
@@ -38,21 +40,6 @@ async function loadModel(inputData) {
 
 app.get("/", (req, res) => {
     res.redirect("https://k8e202.p.ssafy.io");
-    console.error("이거왜안대");
-});
-
-// get 으로 딥러닝 모델이 있는지만, 작동하는지만 확인용
-// app.get("/model", (req, res) => {
-//     console.error("ㅇㅅㅇ");
-//     loadModel().then((result) => {
-//         res.send(result);
-//     });
-// });
-
-app.post("/model", (req, res) => {
-    loadModel(req.body).then(result => {
-        res.send(result);
-    });
 });
 
 app.post("/showPlayer", (req, res) => {
@@ -64,8 +51,11 @@ app.get("/hidePlayer", (req, res) => {
 });
 
 io.on("connection", socket => {
-    // console.log(socket.request.connection.remoteAddress);
-    console.log(socket.id);
+    const socketId = socket.id;
+    if (map.get(socketId) == undefined) {
+        map.set(socketId, -1);
+    }
+
     socket.on("actor_status", async data => {
         if (data.data.length >= 16) {
             let inputData = {};
@@ -86,12 +76,12 @@ io.on("connection", socket => {
 
                 disArray.push(dis);
             }
-
-            if (playerNumber == -1) {
+ 
+            if (map.get(socketId) == -1) {
                 const result = await loadModel(inputData);
-                await socket.broadcast.emit("actor_status", data);
-                await socket.broadcast.emit("win_rate", result);
-            } else if (playerNumber >= 0 && playerNumber <= 7) {
+                await io.to(socketId).emit("win_rate", result);
+                // await socket.broadcast.emit("win_rate", result);
+            } else if (map.get(socketId) >= 0 && map.get(socketId) <= 7) {
                 const result = await loadModel(inputData);
                 const results = {};
 
@@ -116,9 +106,10 @@ io.on("connection", socket => {
 
                     results["indi"].push(t);
 
-                    socket.broadcast.emit("actor_status", data);
-                    socket.broadcast.emit("win_rate", result);
-                    socket.broadcast.emit("direction", results);
+                    await io.to(socketId).emit("win_rate", result);
+                    await io.to(socketId).emit("direction", results);
+                    // socket.broadcast.emit("win_rate", result);
+                    // socket.broadcast.emit("direction", results);
                 }
             } else {
                 console.error("playerNumber가 잘못함");
@@ -126,9 +117,8 @@ io.on("connection", socket => {
         }
     });
 
-    socket.on("sim_control", data => {
-        io.emit("sim_control", data);
-        console.log("sim_control: ", data);
+    socket.on("change_player", (data) => {
+        map.set(socketId, data);
     });
 
     socket.on("disconnect", () => {
