@@ -83,9 +83,7 @@ io.on("connection", socket => {
                 // await socket.broadcast.emit("win_rate", result);
             } else if (map.get(socketId) >= 0 && map.get(socketId) <= 7) {
                 const result = await loadModel(inputData);
-                const results = {};
-
-                results["indi"] = [];
+                const results = [];
 
                 let x = data.data[map.get(socketId)].x;
                 let y = data.data[map.get(socketId)].y;
@@ -104,15 +102,13 @@ io.on("connection", socket => {
                     t["ny"] = ny;
                     t["win"] = result2[1];
 
-                    results["indi"].push(t);
+                    results.push(t);
 
                     await io.to(socketId).emit("win_rate", result);
                     await io.to(socketId).emit("direction", results);
                     // socket.broadcast.emit("win_rate", result);
                     // socket.broadcast.emit("direction", results);
                 }
-
-                console.log(results["indi"].length);
             } else {
                 console.error("playerNumber가 잘못함");
             }
