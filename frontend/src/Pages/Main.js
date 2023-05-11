@@ -9,7 +9,7 @@ import PlayerDetail from "../Components/PlayerDetail";
 import unreal from "../unreal/aiAvatarTest.exe";
 
 import { ButtonGroup, Button } from "rsuite";
-import { MetaProvider, MetaEditor, Hooks } from "pixel-streaming";
+import { MetaProvider, MetaEditor, Hooks, Context } from "pixel-streaming";
 
 export default function Main() {
 	const { playerId } = useParams();
@@ -22,20 +22,42 @@ export default function Main() {
 	// 	FileSaver.saveAs(exe, filename)
 	// }
 
-	const Player = () => {
+	const PlayerView = () => {
+		const refPlayer = React.useRef(null);
+
+		// context
+		const global = Context.global();
+		const stream = Context.stream();
+
+		// hooks
 		const actions = Hooks.actions();
 
 		return (
 			<MetaEditor
-				debugMode
-				showToolbar
-				psHost="wss://localhost:80"
-				psConfig={
-					{
-						// https://metaeditor.io/docs/metaeditor/settings/player
-					}
-				}
-			/>
+				ref={refPlayer}
+				debugMode="on"
+				showToolbar={true}
+				onLoad={() => {
+					console.log("@".repeat(30));
+					console.dir(refPlayer.current);
+					console.dir(global);
+					console.dir(stream);
+					console.dir(actions);
+				}}
+				psHost="ws://127.0.0.1:80"
+				psConfig={{
+					autoPlay: true,
+					autoConnect: true,
+					startMuted: true,
+					hoveringMouse: true,
+					fakeMouseWithTouches: true,
+					matchViewportRes: true,
+				}}
+			>
+				<Button onClick={() => actions.emitUi({ action: "ui_command" })}>
+					Send action
+				</Button>
+			</MetaEditor>
 		);
 	};
 
@@ -56,7 +78,7 @@ export default function Main() {
 			</div> */}
 
 			<MetaProvider>
-				<Player />
+				<PlayerView />
 			</MetaProvider>
 		</div>
 	);
