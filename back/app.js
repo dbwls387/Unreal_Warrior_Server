@@ -87,15 +87,15 @@ io.on("connection", socket => {
 
                 results["indi"] = [];
 
-                let x = data.data[playerNumber].x;
-                let y = data.data[playerNumber].y;
+                let x = data.data[map.get(socketId)].x;
+                let y = data.data[map.get(socketId)].y;
 
                 for (let d = 0; d < 8; d++) {
-                    let nx = x + dx[d] * disArray[playerNumber];
-                    let ny = y + dy[d] * disArray[playerNumber];
+                    let nx = x + dx[d] * disArray[map.get(socketId)];
+                    let ny = y + dy[d] * disArray[map.get(socketId)];
 
-                    inputData["x" + playerNumber.toString()] = nx;
-                    inputData["y" + playerNumber.toString()] = ny;
+                    inputData["x" + map.get(socketId).toString()] = nx;
+                    inputData["y" + map.get(socketId).toString()] = ny;
 
                     const result2 = await loadModel(inputData);
 
