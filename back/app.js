@@ -111,7 +111,7 @@ io.on("connection", socket => {
                     // socket.broadcast.emit("win_rate", result);
                     // socket.broadcast.emit("direction", results);
 
-                    console.log(result2.length);
+                    console.log(result2["indi"].length);
                 }
             } else {
                 console.error("playerNumber가 잘못함");
