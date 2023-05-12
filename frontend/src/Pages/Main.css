@@ -20,6 +20,18 @@ body {
 	background-color: white;
 }
 
+#playerUI {
+	height: 70% !important;
+}
+
+.rs-navbar {
+	display: none !important;
+}
+
+#controls {
+	display: none !important;
+}
+
 .left {
 	width: 40%;
 	height: 100%;
