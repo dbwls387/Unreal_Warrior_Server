@@ -86,7 +86,7 @@ export default function Main() {
 				</MetaProvider>
 			</div>
 
-			<div className="h-1/4 text-black z-[9999999] bg-white">
+			<div className="h-1/4 text-black z-[9999999] bg-white pt-10">
 				<div className="status">
 					<GameStatusComponent />
 				</div>
