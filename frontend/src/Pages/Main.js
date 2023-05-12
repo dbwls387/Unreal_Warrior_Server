@@ -44,6 +44,7 @@ export default function Main() {
 					console.dir(stream);
 					console.dir(actions);
 				}}
+				// psHost="ws://59.20.195.127"
 				psHost="ws://127.0.0.1:80"
 				// psHost="wss://k8e202.p.ssafy.io"
 				psConfig={{
@@ -78,9 +79,13 @@ export default function Main() {
 				<a href="http://naver.me/xM8yCjI7">Download2</a>
 			</div> */}
 
-			<MetaProvider>
-				<PlayerView />
-			</MetaProvider>
+			<div className="h-4/5 relative">
+				<MetaProvider>
+					<PlayerView />
+				</MetaProvider>
+			</div>
+
+			<div className="h-1/5 text-black z-[9999999] bg-white">control</div>
 		</div>
 	);
 }
