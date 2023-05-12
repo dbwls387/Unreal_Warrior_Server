@@ -99,8 +99,6 @@ io.on("connection", socket => {
                     inputData["x" + (map.get(socketId) + 1).toString()] = nx;
                     inputData["y" + (map.get(socketId) + 1).toString()] = ny;
 
-                    console.log(inputData);
-
                     const result2 = await loadModel(inputData);
 
                     const t = {};
