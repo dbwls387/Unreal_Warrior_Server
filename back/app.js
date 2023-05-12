@@ -61,7 +61,6 @@ io.on("connection", socket => {
     }
 
     socket.on("actor_status", async data => {
-        console.log(data.data);
         if (data.data.length >= 16) {
             let inputData = {};
             let disArray = [];
@@ -81,6 +80,8 @@ io.on("connection", socket => {
 
                 disArray.push(dis);
             }
+
+            console.log(disArray);
 
             if (map.get(socketId) == -1) {
                 const result = await loadModel(inputData);
