@@ -81,8 +81,6 @@ io.on("connection", socket => {
                 disArray.push(dis);
             }
 
-            console.log(inputData);
-
             if (map.get(socketId) == -1) {
                 const result = await loadModel(inputData);
                 await io.to(socketId).emit("win_rate", result);
@@ -100,6 +98,8 @@ io.on("connection", socket => {
 
                     inputData["x" + map.get(socketId).toString()] = nx;
                     inputData["y" + map.get(socketId).toString()] = ny;
+
+                    console.log(inputData);
 
                     const result2 = await loadModel(inputData);
 
