@@ -10,6 +10,7 @@ import unreal from "../unreal/aiAvatarTest.exe";
 
 import { ButtonGroup, Button } from "rsuite";
 import { MetaProvider, MetaEditor, Hooks, Context } from "pixel-streaming";
+import GameStatusComponent from "../Components/GameStatusComponent";
 
 export default function Main() {
 	const { playerId } = useParams();
@@ -56,9 +57,9 @@ export default function Main() {
 					matchViewportRes: true,
 				}}
 			>
-				<Button onClick={() => actions.emitUi({ action: "ui_command" })}>
+				{/* <Button onClick={() => actions.emitUi({ action: "ui_command" })}>
 					Send action
-				</Button>
+				</Button> */}
 			</MetaEditor>
 		);
 	};
@@ -79,13 +80,17 @@ export default function Main() {
 				<a href="http://naver.me/xM8yCjI7">Download2</a>
 			</div> */}
 
-			<div className="h-4/5 relative">
+			<div className="h-3/4 relative">
 				<MetaProvider>
 					<PlayerView />
 				</MetaProvider>
 			</div>
 
-			<div className="h-1/5 text-black z-[9999999] bg-white">control</div>
+			<div className="h-1/4 text-black z-[9999999] bg-white">
+				<div className="status">
+					<GameStatusComponent />
+				</div>
+			</div>
 		</div>
 	);
 }

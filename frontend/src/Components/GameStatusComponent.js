@@ -23,10 +23,6 @@ export default function GameStatusComponent() {
 
 	return (
 		<div className="h-28 p-2 w-full">
-			<div className="float-left m-4 ml-10 font-bold">
-				<div>연결 상태 : 완료</div>
-			</div>
-
 			<div className="float-right w-60 mr-4">
 				<div
 					className="float-left w-1/3 text-center cursor-pointer"
