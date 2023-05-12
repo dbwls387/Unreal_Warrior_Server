@@ -18,14 +18,14 @@ let map = new Map();
 const dx = [1, 1, 0, -1, -1, -1, 0, 1];
 const dy = [0, -1, -1, -1, 0, 1, 1, 1];
 
-const model = tf.loadLayersModel(
-    "file://" + path.join(__dirname, "model.json")
-);
+const model = null;
 
 async function loadModel(inputData) {
-    // const model = await tf.loadLayersModel(
-    //     "file://" + path.join(__dirname, "model.json")
-    // );
+    if (model == null) {
+        model = await tf.loadLayersModel(
+            "file://" + path.join(__dirname, "model.json")
+        );
+    }
     // 입력 데이터 정의
     var as = Object.keys(inputData).map(key => inputData[key]);
 
