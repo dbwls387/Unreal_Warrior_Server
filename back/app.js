@@ -18,7 +18,7 @@ let map = new Map();
 const dx = [1, 1, 0, -1, -1, -1, 0, 1];
 const dy = [0, -1, -1, -1, 0, 1, 1, 1];
 
-const model = null;
+let model = null;
 
 async function loadModel(inputData) {
     if (model == null) {
