@@ -126,6 +126,11 @@ io.on("connection", socket => {
         map.set(socketId, data);
     });
 
+    socket.on("sim_control", data => {
+        io.emit("sim_control", data);
+        console.log("sim_control: ", data);
+    });
+
     socket.on("disconnect", () => {
         console.log("disconnected");
     });

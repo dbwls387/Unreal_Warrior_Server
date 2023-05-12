@@ -14,14 +14,14 @@ body {
 }
 .main {
 	height: 90%;
-	width: 90%;
+	width: 93%;
 	margin: auto;
 	margin-top: 50px;
 	background-color: white;
 }
 
 #playerUI {
-	height: 70% !important;
+	/* height: 70% !important; */
 }
 
 .rs-navbar {
@@ -30,6 +30,10 @@ body {
 
 #controls {
 	display: none !important;
+}
+
+.rootDiv-0-2-1 {
+	height: 70% !important;
 }
 
 .left {
