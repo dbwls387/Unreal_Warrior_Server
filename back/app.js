@@ -18,7 +18,7 @@ let map = new Map();
 const dx = [1, 1, 0, -1, -1, -1, 0, 1];
 const dy = [0, -1, -1, -1, 0, 1, 1, 1];
 
-const model = await tf.loadLayersModel(
+const model = tf.loadLayersModel(
     "file://" + path.join(__dirname, "model.json")
 );
 
