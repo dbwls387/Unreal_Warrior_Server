@@ -56,6 +56,8 @@ app.get("/hidePlayer", (req, res) => {
 
 io.on("connection", socket => {
     const socketId = socket.id;
+    console.log(socket);
+
     if (map.get(socketId) == undefined) {
         map.set(socketId, -1);
     }
@@ -114,7 +116,7 @@ io.on("connection", socket => {
                     // socket.broadcast.emit("direction", results);
                 }
 
-                console.log(results);
+                // console.log(results);
             } else {
                 console.error("playerNumber가 잘못함");
             }
@@ -122,13 +124,13 @@ io.on("connection", socket => {
     });
 
     socket.on("change_player", data => {
-        console.log("change player: ", data);
+        // console.log("change player: ", data);
         map.set(socketId, data);
     });
 
     socket.on("sim_control", data => {
         io.emit("sim_control", data);
-        console.log("sim_control: ", data);
+        // console.log("sim_control: ", data);
     });
 
     socket.on("disconnect", () => {
