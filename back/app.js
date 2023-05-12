@@ -81,7 +81,7 @@ io.on("connection", socket => {
                 disArray.push(dis);
             }
 
-            console.log(disArray);
+            console.log(inputData);
 
             if (map.get(socketId) == -1) {
                 const result = await loadModel(inputData);
