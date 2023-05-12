@@ -96,8 +96,8 @@ io.on("connection", socket => {
                     let nx = x + dx[d] * disArray[map.get(socketId)];
                     let ny = y + dy[d] * disArray[map.get(socketId)];
 
-                    inputData["x" + map.get(socketId).toString() + 1] = nx;
-                    inputData["y" + map.get(socketId).toString() + 1] = ny;
+                    inputData["x" + map.get(socketId + 1).toString()] = nx;
+                    inputData["y" + map.get(socketId + 1).toString()] = ny;
 
                     console.log(inputData);
 
