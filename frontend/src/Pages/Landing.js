@@ -24,6 +24,7 @@ export default function Landing() {
 		socket.on("connect_unreal", data => {
 			if (data) {
 				navigate("/unreal", { state: { socket: socket } });
+				socket.emit("start_game", id);
 			} else {
 				localStorage.removeItem("socketId");
 				alert("다시 입력해주세요. ");
