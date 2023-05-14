@@ -16,7 +16,7 @@ import Filter7Icon from "@mui/icons-material/Filter7";
 import Filter8Icon from "@mui/icons-material/Filter8";
 import Skull from "../assets/skull.png";
 
-export default function GameStatusComponent({ socket }) {
+export default function GameStatusComponent(props) {
 	const socketId = localStorage.getItem("socketId");
 
 	function onSocket(state) {
@@ -26,7 +26,7 @@ export default function GameStatusComponent({ socket }) {
 			toId: socketId,
 			control: state,
 		};
-		socket.emit("sim_control", data);
+		props.socket.emit("sim_control", data);
 	}
 
 	return (

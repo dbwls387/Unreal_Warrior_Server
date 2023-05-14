@@ -18,11 +18,12 @@ export default function Landing() {
 		onSocket(id);
 	}
 	function onSocket(id) {
-		socket.emit("unreal_socket_id", id);
+		// navigate("/unreal", { socket: 1 });
 
+		socket.emit("unreal_socket_id", id);
 		socket.on("connect_unreal", data => {
 			if (data) {
-				navigate("/unreal", { socket: socket });
+				navigate("/unreal", { state: { socket: socket } });
 			} else {
 				localStorage.removeItem("socketId");
 				alert("다시 입력해주세요. ");
