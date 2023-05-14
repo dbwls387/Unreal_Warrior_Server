@@ -60,6 +60,14 @@ io.on("connection", socket => {
         map.set(socketId, -1);
     }
 
+    socket.on("unreal_socket_id", data => {
+        if (map.get(data) == undefined) {
+            io.to(socketId).emit("connect_unreal", false);
+        } else {
+            io.to(socketId).emit("connect_unreal", true);
+        }
+    });
+
     socket.on("actor_status", async data => {
         if (data.data.length >= 16) {
             let inputData = {};
