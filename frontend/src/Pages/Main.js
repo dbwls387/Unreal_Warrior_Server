@@ -12,7 +12,7 @@ import { ButtonGroup, Button } from "rsuite";
 import { MetaProvider, MetaEditor, Hooks, Context } from "pixel-streaming";
 import GameStatusComponent from "../Components/GameStatusComponent";
 
-export default function Main({ socket }) {
+export default function Main(props) {
 	const PlayerView = () => {
 		const refPlayer = React.useRef(null);
 
@@ -63,7 +63,7 @@ export default function Main({ socket }) {
 
 			<div className="h-1/4 text-black z-[9999999] bg-white pt-10">
 				<div className="status">
-					<GameStatusComponent socket={socket} />
+					<GameStatusComponent socket={props.socket} />
 				</div>
 			</div>
 		</div>
