@@ -13,16 +13,13 @@ export default function Landing() {
 		},
 	});
 
-	function onSubmit() {
-		localStorage.setItem("socketId", id);
-		onSocket(id);
-	}
 	function onSocket(id) {
 		socket.emit("unreal_socket_id", id);
 
 		socket.on("connect_unreal", data => {
 			if (data) {
-				navigate("/unreal");
+				localStorage.setItem("socketId", id);
+				navigate("/unreal", { socket: socket });
 			} else {
 				alert("다시 입력해주세요. ");
 			}
@@ -81,7 +78,7 @@ export default function Landing() {
 							<div className="absolute top-2 right-2">
 								<button
 									className="h-10 w-20 text-white rounded-lg bg-sky-500 hover:bg-sky-700"
-									onClick={onSubmit}
+									onClick={onSocket}
 								>
 									입장
 								</button>
