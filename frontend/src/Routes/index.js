@@ -5,19 +5,13 @@ import Main from "../Pages/Main";
 const router = createBrowserRouter([
 	{
 		path: "/",
-		// element: <Main />,
 		element: <Landing />,
 		// errorElement: <NotFound />,
 	},
 	{
-		path: "/",
-		children: [
-			{
-				path: "",
-				// 언리얼 화면 입장
-				children: [{ path: "/urneal", element: <Main /> }],
-			},
-		],
+		// 언리얼 화면 입장
+		path: "/unreal",
+		element: <Main />,
 	},
 	{
 		path: "/",

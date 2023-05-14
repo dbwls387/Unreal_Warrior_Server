@@ -21,8 +21,6 @@ export default function Landing() {
 		socket.emit("unreal_socket_id", id);
 
 		socket.on("connect_unreal", data => {
-			console.log(data);
-
 			if (data) {
 				navigate("/unreal");
 			} else {
