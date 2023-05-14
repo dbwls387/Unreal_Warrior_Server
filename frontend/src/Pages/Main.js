@@ -12,17 +12,7 @@ import { ButtonGroup, Button } from "rsuite";
 import { MetaProvider, MetaEditor, Hooks, Context } from "pixel-streaming";
 import GameStatusComponent from "../Components/GameStatusComponent";
 
-export default function Main() {
-	const { playerId } = useParams();
-
-	// const downLoadUnreal = async (e) => {
-	// 	let filename = 'aiAvatarTest.exe'
-	// 	// let unrealBlob = exe(unreal).toBlob()
-	// 	// let exe = new Blob(unreal, {type})
-	// 	const exe = new Blob([unreal])
-	// 	FileSaver.saveAs(exe, filename)
-	// }
-
+export default function Main({ socket }) {
 	const PlayerView = () => {
 		const refPlayer = React.useRef(null);
 
@@ -45,7 +35,6 @@ export default function Main() {
 					console.dir(stream);
 					console.dir(actions);
 				}}
-				// psHost="ws://59.20.195.127"
 				psHost="ws://127.0.0.1:80"
 				// psHost="wss://k8e202.p.ssafy.io"
 				psConfig={{
@@ -66,20 +55,6 @@ export default function Main() {
 
 	return (
 		<div className="main">
-			{/* <div className="left">
-				<ProgressbarComponent />
-
-				플레이어 전체보기
-				{playerId === undefined && <PlayerListComponent />}
-				{playerId != undefined && <PlayerDetail playerId={playerId} />}
-			</div>
-
-			<div className="right">
-				<button className="download" onClick={downLoadUnreal}>DownLoad</button>
-				<UnrealComponent />
-				<a href="http://naver.me/xM8yCjI7">Download2</a>
-			</div> */}
-
 			<div className="h-3/4 relative">
 				<MetaProvider>
 					<PlayerView />
@@ -88,7 +63,7 @@ export default function Main() {
 
 			<div className="h-1/4 text-black z-[9999999] bg-white pt-10">
 				<div className="status">
-					<GameStatusComponent />
+					<GameStatusComponent socket={socket} />
 				</div>
 			</div>
 		</div>

@@ -138,6 +138,7 @@ io.on("connection", socket => {
 
     socket.on("sim_control", data => {
         io.emit("sim_control", data);
+        io.to(data.toId).emit(data.control);
         // console.log("sim_control: ", data);
     });
 

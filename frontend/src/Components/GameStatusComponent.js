@@ -16,21 +16,17 @@ import Filter7Icon from "@mui/icons-material/Filter7";
 import Filter8Icon from "@mui/icons-material/Filter8";
 import Skull from "../assets/skull.png";
 
-export default function GameStatusComponent() {
+export default function GameStatusComponent({ socket }) {
+	const socketId = localStorage.getItem("socketId");
+
 	function onSocket(state) {
 		console.log(state);
 
-		const socket = io("https://k8e202.p.ssafy.io", {
-			path: "/socket.io",
-			cors: {
-				origin: "*",
-				credentials: true,
-			},
-
-			// transports: ["websocket"],
-		});
-
-		socket.emit("sim_control", state);
+		const data = {
+			toId: socketId,
+			control: state,
+		};
+		socket.emit("sim_control", data);
 	}
 
 	return (
