@@ -29,11 +29,11 @@ export default function Main(props) {
 				debugMode="on"
 				showToolbar={true}
 				onLoad={() => {
-					console.log("@".repeat(30));
-					console.dir(refPlayer.current);
-					console.dir(global);
-					console.dir(stream);
-					console.dir(actions);
+					// console.log("@".repeat(30));
+					// console.dir(refPlayer.current);
+					// console.dir(global);
+					// console.dir(stream);
+					// console.dir(actions);
 				}}
 				psHost="ws://127.0.0.1:80"
 				// psHost="wss://k8e202.p.ssafy.io"

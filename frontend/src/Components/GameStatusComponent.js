@@ -21,12 +21,21 @@ export default function GameStatusComponent(props) {
 
 	function onSocket(state) {
 		console.log(state);
+		console.log(props);
+
+		const socket = io("https://k8e202.p.ssafy.io", {
+			path: "/socket.io",
+			cors: {
+				origin: "*",
+				credentials: true,
+			},
+		});
 
 		const data = {
 			toId: socketId,
 			control: state,
 		};
-		props.socket.emit("sim_control", data);
+		socket.emit("sim_control", data);
 	}
 
 	return (
