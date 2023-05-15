@@ -19,10 +19,6 @@ export default function Landing() {
 		onSocket(id);
 	}
 	function onSocket(id) {
-		Swal.fire({
-			text: "존재하지 않는 코드입니다. 다시 입력해주세요. ",
-			icon: "error",
-		});
 		socket.emit("unreal_socket_id", id);
 		socket.on("connect_unreal", data => {
 			if (data) {

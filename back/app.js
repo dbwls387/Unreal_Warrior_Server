@@ -151,6 +151,8 @@ io.on("connection", socket => {
     socket.on("choice_player_react", data => {
         io.to(data.toId).emit("choice_player", data.player);
         io.to(data.toId).emit("main_viewport", data.mainViewPort);
+
+        console.log("choice ", data.toId, " ", "data.player");
     });
 
     socket.on("disconnect", () => {
