@@ -143,17 +143,17 @@ io.on("connection", socket => {
     socket.on("start_game", data => {
         io.to(data).emit("start_game_unreal", true);
 
-        io.to(data).emit("choice_player", 1);
-        io.to(data).emit("main_viewport", 1);
+        // io.to(data).emit("choice_player", 1);
+        // io.to(data).emit("main_viewport", 1);
     });
 
     socket.on("camera_control", data => {
         io.to(data.toId).emit("direction_camera", data.camera);
     });
 
-    socket.on("choice_player_react", data => {
-        io.to(data.toId).emit("choice_player", data.player);
-        io.to(data.toId).emit("main_viewport", data.mainViewPort);
+    socket.on("choice_player_react", async data => {
+        await io.to(data.toId).emit("choice_player", data.player);
+        await io.to(data.toId).emit("main_viewport", data.mainViewPort);
 
         console.log("choice ", data.toId, " ", data.player);
     });
