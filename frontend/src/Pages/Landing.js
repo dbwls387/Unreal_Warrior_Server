@@ -2,8 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import Swal from "sweetalert2";
+import "../Pages/Landing.css"
+import logo from "../assets/pinklogo_circle.png"
+import GuideComponent from "../Components/GuideComponent";
+import React from 'react'
 
 export default function Landing() {
+	const [openModal,setOpenModal] = useState(false)
+
 	const navigate = useNavigate();
 	const [id, setId] = useState("");
 	const socket = io("https://k8e202.p.ssafy.io", {
@@ -35,31 +41,39 @@ export default function Landing() {
 		});
 	}
 
+	const closeModal = (e) => {
+		e.stopPropagation();
+		setOpenModal(false);
+	  };
+	
+
 	return (
 		<>
 			<section className="text-gray-700 body-font pt-20">
 				<div className="container mx-auto px-5 py-24 md:flex-row flex-col items-center">
-					<div className="flex-col md:items-start mb-0 items-center text-center">
-						<h1 className="title-font sm:text-5xl text-3xl mb-4 font-medium text-gray-900">
+					<div className="flex-col md:items-start mb-0 items-center text-center align-center">
+						<img className="main-logo" src={logo} />
+						{/* <h1 className="title-font sm:text-5xl text-3xl mb-4 font-medium text-gray-900">
 							Unreal Warrior
-						</h1>
+						</h1> */}
 						<p className="mb-8 leading-relaxed">
-							Copper mug try-hard pitchfork pour-over freegan heirloom neutra
+							Play Unreal Warroir and find the best route for your team.
 						</p>
 						<div className="flex justify-center">
 							<button
 								className="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg"
 								onClick={() => {
 									Swal.fire({
-										text: "설명서",
+										text: <GuideComponent />,
 										confirmButtonColor: "#374151", // confrim 버튼 색깔 지정
 									});
 								}}
+								// onClick={setOpenModal(!openModal)}
 							>
 								사용 설명
 							</button>
 							<button
-								className="ml-4 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+								className="btn-download ml-4 inline-flex text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
 								onClick={() => {
 									Swal.fire({
 										text: "다운로드 링크",
@@ -73,6 +87,7 @@ export default function Landing() {
 								다운로드
 							</button>
 						</div>
+						{/* <GuideComponent openMoadal={openModal} closeModal={closeModal} /> */}
 					</div>
 				</div>
 
