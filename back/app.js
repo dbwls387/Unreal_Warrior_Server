@@ -153,8 +153,8 @@ io.on("connection", socket => {
     });
 
     socket.on("choice_player_react", async data => {
-        await io.to(data.toId).emit("choice_player", data.player);
-        await io.to(data.toId).emit("main_viewport", data.mainViewPort);
+        await io.to(data.toId).emit("choice_player", 1);
+        await io.to(data.toId).emit("main_viewport", 1);
 
         console.log("choice ", data.toId, " ", data.player);
     });
