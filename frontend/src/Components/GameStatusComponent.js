@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { io } from "socket.io-client";
 
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
@@ -18,24 +18,29 @@ import Skull from "../assets/skull.png";
 
 export default function GameStatusComponent(props) {
 	const socketId = localStorage.getItem("socketId");
+	const [toggle, setToggle] = useState(true);
+	const socket = io("https://k8e202.p.ssafy.io", {
+		path: "/socket.io",
+		cors: {
+			origin: "*",
+			credentials: true,
+		},
+	});
 
 	function onSocket(state) {
-		console.log(state);
-		console.log(props);
-
-		const socket = io("https://k8e202.p.ssafy.io", {
-			path: "/socket.io",
-			cors: {
-				origin: "*",
-				credentials: true,
-			},
-		});
-
 		const data = {
 			toId: socketId,
 			control: state,
 		};
 		socket.emit("sim_control", data);
+	}
+
+	function onCameraSocket(state) {
+		const data = {
+			toId: socketId,
+			camera: state ? 1 : 0,
+		};
+		socket.emit("camera_control", data);
 	}
 
 	return (
@@ -92,7 +97,13 @@ export default function GameStatusComponent(props) {
 					<StopCircleOutlinedIcon sx={{ fontSize: 50 }} />
 				</div>
 
-				<div className="float-left w-1/4 text-center cursor-pointer pl-7 mt-2">
+				<div
+					className="float-left w-1/4 text-center cursor-pointer pl-7 mt-2"
+					ocClick={() => {
+						setToggle(!toggle);
+						onCameraSocket();
+					}}
+				>
 					<FlipCameraIosIcon sx={{ fontSize: 35 }} />
 				</div>
 			</div>
