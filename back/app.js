@@ -137,12 +137,12 @@ io.on("connection", socket => {
     });
 
     socket.on("sim_control", data => {
-        socket.to(data.toId).emit("sim_control", data.control);
-        console.log("sim_control: ", data.toId, " ", data.control);
+        io.to(data.toId).emit("sim_control_unreal", data.control);
     });
 
     socket.on("start_game", data => {
-        socket.to(data).emit("start_game", true);
+        io.to(data).emit("start_game_unreal", true);
+        console.log("start_game_unreal: ", data);
     });
 
     socket.on("disconnect", () => {
