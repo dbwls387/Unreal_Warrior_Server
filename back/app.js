@@ -148,6 +148,11 @@ io.on("connection", socket => {
         io.to(data.toId).emit("direction_camera", data.camera);
     });
 
+    socket.on("choice_player_react", data => {
+        io.to(data.toId).emit("choice_player", data.player);
+        io.to(data.toId).emit("main_viewport", data.mainViewPort);
+    });
+
     socket.on("disconnect", () => {
         console.log("disconnected");
     });
