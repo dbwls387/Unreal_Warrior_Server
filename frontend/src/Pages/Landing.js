@@ -23,8 +23,8 @@ export default function Landing() {
 		socket.emit("unreal_socket_id", id);
 		socket.on("connect_unreal", data => {
 			if (data) {
-				navigate("/unreal", { state: { socket: socket } });
 				socket.emit("start_game", id);
+				navigate("/unreal", { state: { socket: socket } });
 			} else {
 				localStorage.removeItem("socketId");
 				alert("다시 입력해주세요. ");
@@ -75,7 +75,7 @@ export default function Landing() {
 							<input
 								type="text"
 								className="h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none border"
-								placeholder="id를 입력해주세요. "
+								placeholder="코드를 입력해주세요. "
 								value={id}
 								onChange={e => {
 									setId(e.target.value);
