@@ -48,7 +48,7 @@ export default function GameStatusComponent(props) {
 		const data = {
 			toId: socketId,
 			player: player,
-			mainViewPort: player === 9 ? 0 : 1,
+			mainViewPort: player === -1 ? 0 : 1,
 		};
 		socket.emit("choice_player_react", data);
 	}
@@ -124,7 +124,7 @@ export default function GameStatusComponent(props) {
 			<div
 				className="float-left m-4 ml-3 cursor-pointer"
 				onClick={() => {
-					onChoicePlayer(9);
+					onChoicePlayer(-1);
 				}}
 			>
 				<SwitchAccountIcon sx={{ fontSize: 36 }} />
