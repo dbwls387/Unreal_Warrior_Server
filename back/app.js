@@ -142,7 +142,10 @@ io.on("connection", socket => {
 
     socket.on("start_game", data => {
         io.to(data).emit("start_game_unreal", true);
-        console.log("start_game_unreal: ", data);
+    });
+
+    socket.on("camera_control", data => {
+        io.to(data.toId).emit("direction_camera", data.camera);
     });
 
     socket.on("disconnect", () => {
