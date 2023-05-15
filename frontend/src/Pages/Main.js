@@ -6,7 +6,6 @@ import UnrealComponent from "../Components/UnrealComponent";
 import { useParams } from "react-router-dom";
 import PlayerDetail from "../Components/PlayerDetail";
 // import FileSaver from "file-saver"
-import unreal from "../unreal/aiAvatarTest.exe";
 
 import { ButtonGroup, Button } from "rsuite";
 import { MetaProvider, MetaEditor, Hooks, Context } from "pixel-streaming";
