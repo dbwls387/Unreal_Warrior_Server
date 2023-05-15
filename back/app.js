@@ -143,6 +143,7 @@ io.on("connection", socket => {
     socket.on("start_game", data => {
         io.to(data).emit("start_game_unreal", true);
 
+        console.log(data);
         // io.to(data).emit("choice_player", 1);
         // io.to(data).emit("main_viewport", 1);
     });
