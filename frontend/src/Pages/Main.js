@@ -61,7 +61,7 @@ export default function Main(props) {
 				</MetaProvider>
 			</div>
 
-			<div className="h-1/4 text-black z-[9999999] bg-white pt-10">
+			<div className="h-1/4 text-black z-[9999999] bg-white pt-4">
 				<div className="status">
 					<GameStatusComponent socket={props.socket} />
 				</div>
