@@ -50,6 +50,9 @@ export default function GameStatusComponent(props) {
 			player: player,
 			mainViewPort: player === -1 ? 0 : 1,
 		};
+
+		console.log("choice ", data.toId, " ", data.toId.length);
+
 		socket.emit("choice_player_react", data);
 	}
 
