@@ -56,7 +56,7 @@ app.get("/hidePlayer", (req, res) => {
 
 io.on("connection", socket => {
     const socketId = socket.id;
-    console.log(socket.handshake.referer);
+    console.log(socket.handshake.headers.referer);
 
     if (map.get(socketId) == undefined) {
         map.set(socketId, -1);
