@@ -4,11 +4,10 @@ import { io } from "socket.io-client";
 import Swal from "sweetalert2";
 import "../Pages/Landing.css"
 import logo from "../assets/pinklogo_circle.png"
-import GuideComponent from "../Components/GuideComponent";
-import React from 'react'
+import dld from "../assets/download.png"
 
 export default function Landing() {
-	const [openModal,setOpenModal] = useState(false)
+	const [swalProps,setSwalProps] = useState({})
 
 	const navigate = useNavigate();
 	const [id, setId] = useState("");
@@ -20,6 +19,12 @@ export default function Landing() {
 		},
 	});
 
+	function handleClick(){
+		setSwalProps({
+			show:true,
+			title:'TESTEST'
+		})
+	}
 	function onSubmit() {
 		localStorage.setItem("socketId", id);
 		onSocket(id);
@@ -41,11 +46,6 @@ export default function Landing() {
 		});
 	}
 
-	const closeModal = (e) => {
-		e.stopPropagation();
-		setOpenModal(false);
-	  };
-	
 
 	return (
 		<>
@@ -64,14 +64,34 @@ export default function Landing() {
 								className="inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg"
 								onClick={() => {
 									Swal.fire({
-										text: <GuideComponent />,
+										title : '<h3>Unreal Warrior 사용방법</h3>',
+										html : '<p style="color:gray;">Settings</p>' +
+												'<p style="color:gray;">⋄ Unreal Engine 5.1</p>' +
+												'<p style="color:gray;">⋄ Node.js (LTS)</p><br>'+
+												'<b>STEP1</b><br>'+
+												'게임을 <strong>다운로드</strong>합니다.<br>'+
+												// '<img src="../assets/download.png"></img>'+
+												'<br>'+
+												'<b>STEP2</b><br>'+
+						
+												'<p>아래 경로의 <strong>run.bat</strong>파일을 실행합니다.</p>'+
+												'<p style="color:gray;">Epic Games/5.1/Engine/Source/Programs/PixelStreaming/Webservers/SignallingWebserver</p><br>'+
+												'<b>STEP3</b><br>'+
+												'zip파일을 풀고 exe 파일을 실행합니다.<br><br>'+
+												'<b>STEP4</b><br>'+
+												'<p>게임 시작시 나오는 코드를 브라우저에 입력합니다.</p>'+
+												'<p>이제 브라우저에서 화면을 컨트롤 할 수 있습니다!</p>'
+
+												,
+										text: 'hi',
 										confirmButtonColor: "#374151", // confrim 버튼 색깔 지정
 									});
 								}}
-								// onClick={setOpenModal(!openModal)}
+								// onClick={handleClick}
 							>
 								사용 설명
 							</button>
+
 							<button
 								className="btn-download ml-4 inline-flex text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
 								onClick={() => {
@@ -87,7 +107,6 @@ export default function Landing() {
 								다운로드
 							</button>
 						</div>
-						{/* <GuideComponent openMoadal={openModal} closeModal={closeModal} /> */}
 					</div>
 				</div>
 
