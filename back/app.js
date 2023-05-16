@@ -152,11 +152,11 @@ io.on("connection", socket => {
         io.to(data.toId).emit("direction_camera", data.camera);
     });
 
-    socket.on("choice_player_react", data => {
-        console.log("choice ", data.toId, " ", data.toId.length);
+    socket.on("choice_player_react", async data => {
+        await io.to(data.toId).emit("choice_player", 1);
+        await io.to(data.toId).emit("main_viewport", 1);
 
-        io.to(data.toId).emit("choice_player", 1);
-        io.to(data.toId).emit("main_viewport", 1);
+        console.log("choice ", data.toId, " ", data.player);
     });
 
     socket.on("disconnect", () => {
