@@ -34,6 +34,8 @@ export default function Landing() {
 		onSocket(id);
 	}
 	function onSocket(id) {
+		socket.emit("join_room", id);
+
 		socket.emit("unreal_socket_id", id);
 		socket.on("connect_unreal", data => {
 			if (data) {
