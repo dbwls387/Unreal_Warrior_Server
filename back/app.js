@@ -58,6 +58,12 @@ io.on("connection", socket => {
     const socketId = socket.id;
     console.log(socketId);
 
+    socket.on("join_room", data => {
+        socket.join(data);
+
+        socket.to(data).emit("ha..");
+    });
+
     if (map.get(socketId) == undefined) {
         map.set(socketId, -1);
     }
