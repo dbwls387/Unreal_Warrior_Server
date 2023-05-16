@@ -166,8 +166,8 @@ io.on("connection", socket => {
         console.log("choice_player type", typeof data.toId);
     });
 
-    socket.on("disconnect", () => {
-        console.log("disconnected");
+    socket.on("disconnect", socket => {
+        console.log(socket.id, "disconnected");
     });
 });
 
