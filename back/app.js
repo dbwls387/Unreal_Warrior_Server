@@ -139,12 +139,15 @@ io.on("connection", socket => {
     socket.on("sim_control", data => {
         io.to(data.toId).emit("sim_control_unreal", data.control);
         console.log("sim_control", data.toId, data.control);
+
+        console.log("sim_control type", typeof data.toId);
     });
 
     socket.on("start_game", data => {
         io.to(data).emit("start_game_unreal", true);
+        console.log("staart_game type", typeof data);
 
-        console.log("start  ", data);
+        // console.log("start  ", data);
         // io.to(data).emit("choice_player", 1);
         // io.to(data).emit("main_viewport", 1);
     });
@@ -158,7 +161,9 @@ io.on("connection", socket => {
         await io.to(data.toId).emit("main_viewport", 1);
 
         console.log("data", data);
-        console.log("length", data.toId.length);
+        // console.log("length", data.toId.length);
+
+        console.log("choice_player type", typeof data.toId);
     });
 
     socket.on("disconnect", () => {
