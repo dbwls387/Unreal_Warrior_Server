@@ -168,7 +168,8 @@ io.on("connection", socket => {
         console.log("choice_player type", typeof data.toId);
     });
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", socket => {
+        map.delete(socket.id);
         console.log("disconnected");
     });
 });
