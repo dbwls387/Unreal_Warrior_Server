@@ -157,6 +157,7 @@ io.on("connection", socket => {
         await io.to(data.toId).emit("main_viewport", 1);
 
         console.log("data", data);
+        console.log("length", data.toId.length);
     });
 
     socket.on("disconnect", () => {
