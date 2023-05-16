@@ -62,6 +62,8 @@ io.on("connection", socket => {
         socket.join(data);
 
         socket.to(data).emit("ha..");
+
+        console.log(socket.rooms);
     });
 
     if (map.get(socketId) == undefined) {
