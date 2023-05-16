@@ -28,6 +28,10 @@ export default function GameStatusComponent(props) {
 		},
 	});
 
+	socket.on("disconnect", socket => {
+		console.log("disconnected react");
+	});
+
 	function onSocket(state) {
 		const data = {
 			toId: socketId,

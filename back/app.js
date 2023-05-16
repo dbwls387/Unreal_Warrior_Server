@@ -169,7 +169,7 @@ io.on("connection", socket => {
     });
 
     socket.on("disconnect", socket => {
-        console.log(socket.id, "disconnected");
+        console.log("disconnected");
     });
 });
 

@@ -19,6 +19,10 @@ export default function Landing() {
 		},
 	});
 
+	socket.on("disconnect", socket => {
+		console.log("disconnected react");
+	});
+
 	function handleClick() {
 		setSwalProps({
 			show: true,
