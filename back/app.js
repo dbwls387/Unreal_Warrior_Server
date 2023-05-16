@@ -156,7 +156,7 @@ io.on("connection", socket => {
         await io.to(data.toId).emit("choice_player", 1);
         await io.to(data.toId).emit("main_viewport", 1);
 
-        console.log("choice ", data.toId, " ", data.player);
+        console.log("data", data);
     });
 
     socket.on("disconnect", () => {
