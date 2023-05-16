@@ -137,12 +137,12 @@ io.on("connection", socket => {
     });
 
     socket.on("sim_control", data => {
-        const toId = data.toId;
-        const control = data.control;
-        io.to(toId).emit("sim_control_unreal", control);
-        console.log("sim_control", data["toId"], data["control"]);
+        if (map.get(data.toId) != undefined) {
+            io.to(data.toId).emit("sim_control_unreal", data.control);
+            console.log("sim_control", data["toId"], data["control"]);
 
-        console.log("sim_control type", typeof data["toId"]);
+            console.log("sim_control type", typeof data["toId"]);
+        }
     });
 
     socket.on("start_game", data => {
