@@ -52,7 +52,6 @@ export default function GameStatusComponent(props) {
 		};
 
 		console.log("choice ", data.toId, " ", data.toId.length);
-
 		socket.emit("choice_player_react", data);
 	}
 

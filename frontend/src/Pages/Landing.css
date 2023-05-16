@@ -1,0 +1,13 @@
+.btn-download{
+    background-color: #fb53cb;
+}
+.title-font{
+    /* color: #fb53cb; */
+    font-weight: bold;
+}
+
+.main-logo{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
