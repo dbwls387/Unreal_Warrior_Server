@@ -78,11 +78,12 @@ io.on("connection", socket => {
 
     socket.on("unreal_socket_id", data => {
         console.log("set", set);
-        if (set.has(data)) {
-            io.sockets.in(data).emit("connect_unreal", true);
-            console.log("has? ", data);
+        console.log("data.id", data.id);
+        if (set.has(data.mac)) {
+            io.sockets.in(data.id).emit("connect_unreal", true);
+            console.log("has? ", data.mac);
         } else {
-            io.sockets.in(data).emit("connect_unreal", false);
+            io.sockets.in(data.id).emit("connect_unreal", false);
         }
     });
 

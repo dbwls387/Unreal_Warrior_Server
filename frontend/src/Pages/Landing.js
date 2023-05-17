@@ -34,7 +34,11 @@ export default function Landing() {
 		onSocket(id);
 	}
 	function onSocket(id) {
-		socket.emit("unreal_socket_id", id);
+		const socketId = {
+			id: socket.id,
+			mac: id,
+		};
+		socket.emit("unreal_socket_id", socketId);
 		socket.on("connect_unreal", data => {
 			console.log(data);
 
