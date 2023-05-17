@@ -80,6 +80,7 @@ io.on("connection", socket => {
         console.log("set", set);
         if (set.has(data)) {
             io.sockets.in(data).emit("connect_unreal", true);
+            console.log("has? ", data);
         } else {
             io.sockets.in(data).emit("connect_unreal", false);
         }
