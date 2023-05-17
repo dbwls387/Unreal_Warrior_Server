@@ -63,7 +63,7 @@ io.on("connection", socket => {
     socket.on("join_room", data => {
         console.log("join", data);
 
-        const macAddress = "";
+        var macAddress = "";
         if (!typeof data === "string") macAddress = data;
         else macAddress = data.join(".");
 
