@@ -149,6 +149,7 @@ io.on("connection", socket => {
     });
 
     socket.on("sim_control", data => {
+        console.log(data);
         io.to(data.macAddress).emit("sim_control_unreal", data.control);
     });
 
