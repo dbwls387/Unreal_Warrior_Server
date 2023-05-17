@@ -154,8 +154,8 @@ io.on("connection", socket => {
     });
 
     socket.on("start_game", data => {
-        io.to(data).emit("start_game_unreal", true);
         console.log("start_game to", data);
+        io.to(data).emit("start_game_unreal", true);
     });
 
     socket.on("camera_control", data => {
