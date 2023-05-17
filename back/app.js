@@ -60,6 +60,8 @@ io.on("connection", socket => {
     console.log(socketId);
 
     socket.on("join_room", data => {
+        console.log(data);
+
         const macAddress = data.join(".");
         socket.join(macAddress);
         set.add(macAddress);
@@ -127,7 +129,7 @@ io.on("connection", socket => {
                     results.push(t);
                 }
 
-                results.sort(function(a, b) {
+                results.sort(function (a, b) {
                     return b.win - a.win;
                 });
 
