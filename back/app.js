@@ -60,19 +60,19 @@ io.on("connection", socket => {
     console.log(socketId);
     console.log("1", socket.rooms);
 
-    let macAddress = null;
-
     socket.on("join_room", data => {
         console.log("join", data);
 
+        var macAddress = "";
         if (typeof data === "string") macAddress = data;
         else macAddress = data.join(".");
-    });
 
-    if (macAddress != null) {
         socket.join(macAddress);
         set.add(macAddress);
-    }
+
+        // console.log(socket.rooms);
+        console.log(io.sockets.manager.rooms);
+    });
 
     if (map.get(socketId) == undefined) {
         map.set(socketId, -1);
