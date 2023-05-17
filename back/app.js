@@ -60,11 +60,11 @@ io.on("connection", socket => {
     console.log(socketId);
 
     socket.on("join_room", data => {
-        console.log(data);
+        console.log("join", data);
 
-        const macAddress = data.join(".");
-        socket.join(macAddress);
-        set.add(macAddress);
+        // const macAddress = data.join(".");
+        // socket.join(macAddress);
+        // set.add(macAddress);
 
         console.log(socket.rooms);
     });
