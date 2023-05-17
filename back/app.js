@@ -58,9 +58,9 @@ app.get("/hidePlayer", (req, res) => {
 io.on("connection", socket => {
     const socketId = socket.id;
     console.log(socketId);
+    console.log("1", socket.rooms);
 
     socket.on("join_room", data => {
-        console.log("1", socket.rooms);
         console.log("join", data);
 
         const macAddress = data.join(".");
