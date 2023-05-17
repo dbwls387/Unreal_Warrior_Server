@@ -37,6 +37,7 @@ export default function Landing() {
 		socket.emit("unreal_socket_id", id);
 		socket.on("connect_unreal", data => {
 			console.log(data);
+
 			if (data) {
 				socket.emit("join_room", id);
 				// socket.on("ha", data => {
@@ -44,7 +45,7 @@ export default function Landing() {
 				// });
 
 				socket.emit("start_game", id);
-				navigate("/unreal", { state: { socket: socket } });
+				// navigate("/unreal", { state: { socket: socket } });
 			} else {
 				localStorage.removeItem("socketId");
 				Swal.fire({
