@@ -41,8 +41,6 @@ export default function GameStatusComponent(props) {
 	}
 
 	function onCameraSocket(state) {
-		console.log(state);
-
 		const data = {
 			macAddress: macAddress,
 			camera: state ? 1 : 0,
@@ -167,7 +165,7 @@ export default function GameStatusComponent(props) {
 				{/* 카메라 전환 */}
 				<div
 					className="float-left w-1/4 text-center cursor-pointer pl-7 mt-2"
-					ocClick={() => {
+					onClick={() => {
 						setToggle(!toggle);
 						onCameraSocket(toggle);
 					}}
