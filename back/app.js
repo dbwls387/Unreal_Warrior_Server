@@ -63,8 +63,10 @@ io.on("connection", socket => {
         // console.log("join", data);
 
         var macAddress = "";
-        if (typeof data === "string") macAddress = data;
-        else macAddress = data.join(".");
+        if (typeof data === "string") {
+            macAddress = data;
+            io.to(data).emit("start_game_unreal", true);
+        } else macAddress = data.join(".");
 
         socket.join(macAddress);
         set.add(macAddress);
