@@ -39,16 +39,11 @@ export default function Landing() {
 			mac: id,
 		};
 		socket.emit("unreal_socket_id", socketId);
-		socket.on("connect_unreal", data => {
-			console.log(data);
-
+		socket.on("connect_unreal", async data => {
 			if (data) {
-				socket.emit("join_room", id);
-				// socket.on("ha", data => {
-				// 	console.log(data);
-				// });
+				await socket.emit("join_room", id);
+				await socket.emit("start_game", id);
 
-				socket.emit("start_game", id);
 				navigate("/unreal", { state: { socket: socket } });
 			} else {
 				localStorage.removeItem("socketId");

@@ -60,7 +60,7 @@ io.on("connection", socket => {
     console.log(socketId);
 
     socket.on("join_room", data => {
-        console.log("join", data);
+        // console.log("join", data);
 
         var macAddress = "";
         if (typeof data === "string") macAddress = data;
@@ -149,7 +149,7 @@ io.on("connection", socket => {
     });
 
     socket.on("sim_control", data => {
-        console.log(data);
+        console.log("sim_control", data);
         io.to(data.macAddress).emit("sim_control_unreal", data.control);
     });
 
