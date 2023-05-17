@@ -34,7 +34,7 @@ export default function GameStatusComponent(props) {
 
 	function onSocket(state) {
 		const data = {
-			toId: socketId,
+			macAddress: socketId,
 			control: state,
 		};
 		socket.emit("sim_control", data);
