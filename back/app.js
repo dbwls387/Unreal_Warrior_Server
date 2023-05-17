@@ -77,7 +77,6 @@ io.on("connection", socket => {
     }
 
     socket.on("unreal_socket_id", data => {
-        console.log(io.sockets.clients(data));
         if (set.has(data)) {
             io.sockets.in(data).emit("connect_unreal", true);
         } else {
