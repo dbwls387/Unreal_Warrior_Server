@@ -18,7 +18,7 @@ import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
 import Skull from "../assets/skull.png";
 
 export default function GameStatusComponent(props) {
-	const socketId = localStorage.getItem("socketId");
+	const macAddress = localStorage.getItem("macAddress");
 	const [toggle, setToggle] = useState(true);
 	const socket = io("https://k8e202.p.ssafy.io", {
 		path: "/socket.io",
@@ -34,7 +34,7 @@ export default function GameStatusComponent(props) {
 
 	function onSocket(state) {
 		const data = {
-			macAddress: socketId,
+			macAddress: macAddress,
 			control: state,
 		};
 		socket.emit("sim_control", data);
@@ -42,7 +42,7 @@ export default function GameStatusComponent(props) {
 
 	function onCameraSocket(state) {
 		const data = {
-			toId: socketId,
+			macAddress: macAddress,
 			camera: state ? 1 : 0,
 		};
 		socket.emit("camera_control", data);
@@ -50,12 +50,11 @@ export default function GameStatusComponent(props) {
 
 	function onChoicePlayer(player) {
 		const data = {
-			toId: socketId,
-			player: player,
-			mainViewPort: player === -1 ? 0 : 1,
+			macAddress: macAddress,
+			playerNumber: player,
+			mainViewport: player === -1 ? 0 : 1,
 		};
 
-		console.log("choice ", data.toId, " ", data.toId.length);
 		socket.emit("choice_player_react", data);
 	}
 

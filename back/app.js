@@ -151,20 +151,20 @@ io.on("connection", socket => {
     });
 
     socket.on("sim_control", data => {
-        console.log("sim_control", data);
         io.to(data.macAddress).emit("sim_control_unreal", data.control);
     });
 
-    socket.on("start_game", data => {
-        console.log("start_game to", data);
-        io.to(data).emit("start_game_unreal", true);
-    });
+    // socket.on("start_game", data => {
+    //     io.to(data).emit("start_game_unreal", true);
+    // });
 
     socket.on("camera_control", data => {
+        console.log("camera_control", data.camera);
         io.to(data.macAddress).emit("direction_camera", data.camera);
     });
 
     socket.on("choice_player_react", data => {
+        console.log("choice_player", data.playerNumber);
         io.to(data.macAddress).emit("choice_player", data.playerNumber);
         io.to(data.macAddress).emit("main_viewport", data.mainViewport);
     });

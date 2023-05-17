@@ -30,7 +30,7 @@ export default function Landing() {
 		});
 	}
 	function onSubmit() {
-		localStorage.setItem("socketId", id);
+		localStorage.setItem("macAddress", id);
 		onSocket(id);
 	}
 	function onSocket(id) {
