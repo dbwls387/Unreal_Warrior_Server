@@ -59,9 +59,8 @@ io.on("connection", socket => {
     console.log(socketId);
 
     socket.on("join_room", data => {
-        socket.join(data);
-
-        socket.to(data).emit("ha", "ha..");
+        const macAddress = data.join(".");
+        socket.join(macAddress);
 
         console.log(socket.rooms);
     });
