@@ -77,11 +77,8 @@ io.on("connection", socket => {
     }
 
     socket.on("unreal_socket_id", data => {
-        console.log("set", set);
-        console.log("data.id", data.id);
         if (set.has(data.mac)) {
             io.sockets.in(data.id).emit("connect_unreal", true);
-            console.log("has? ", data.mac);
         } else {
             io.sockets.in(data.id).emit("connect_unreal", false);
         }
@@ -158,6 +155,7 @@ io.on("connection", socket => {
 
     socket.on("start_game", data => {
         io.to(data).emit("start_game_unreal", true);
+        console.log("start_game to", data);
     });
 
     socket.on("camera_control", data => {
