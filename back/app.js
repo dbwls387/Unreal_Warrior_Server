@@ -125,12 +125,16 @@ io.on("connection", socket => {
                     t["win"] = result2[1];
 
                     results.push(t);
-
-                    await io.to(socketId).emit("win_rate", result);
-                    await io.to(socketId).emit("direction", results);
                     // socket.broadcast.emit("win_rate", result);
                     // socket.broadcast.emit("direction", results);
                 }
+
+                results.sort(function(a, b) {
+                    return b.win - a.win;
+                });
+
+                await io.to(socketId).emit("win_rate", result);
+                await io.to(socketId).emit("direction", results);
 
                 // console.log(results);
             } else {
