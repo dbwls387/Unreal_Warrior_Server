@@ -34,16 +34,14 @@ export default function Landing() {
 		onSocket(id);
 	}
 	function onSocket(id) {
-		console.log(id);
-
-		socket.emit("join_room", id);
-		// socket.on("ha", data => {
-		// 	console.log(data);
-		// });
-
 		socket.emit("unreal_socket_id", id);
 		socket.on("connect_unreal", data => {
 			if (data) {
+				socket.emit("join_room", id);
+				// socket.on("ha", data => {
+				// 	console.log(data);
+				// });
+
 				socket.emit("start_game", id);
 				navigate("/unreal", { state: { socket: socket } });
 			} else {
