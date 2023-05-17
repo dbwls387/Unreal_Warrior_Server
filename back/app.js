@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // let playerNumber = -1;
 
 let map = new Map();
+let set = new Set();
 
 // delta
 const dx = [1, 1, 0, -1, -1, -1, 0, 1];
@@ -61,6 +62,7 @@ io.on("connection", socket => {
     socket.on("join_room", data => {
         const macAddress = data.join(".");
         socket.join(macAddress);
+        set.add(macAddress);
 
         console.log(socket.rooms);
     });
@@ -70,10 +72,10 @@ io.on("connection", socket => {
     }
 
     socket.on("unreal_socket_id", data => {
-        if (map.get(data) == undefined) {
-            io.to(socketId).emit("connect_unreal", false);
+        if (set.has(data)) {
+            io.to(data).emit("connect_unreal", true);
         } else {
-            io.to(socketId).emit("connect_unreal", true);
+            io.to(data).emit("connect_unreal", false);
         }
     });
 
@@ -101,7 +103,6 @@ io.on("connection", socket => {
             if (map.get(socketId) == -1) {
                 const result = await loadModel(inputData);
                 await io.to(socketId).emit("win_rate", result);
-                // await socket.broadcast.emit("win_rate", result);
             } else if (map.get(socketId) >= 0 && map.get(socketId) <= 7) {
                 const result = await loadModel(inputData);
                 const results = [];
@@ -124,8 +125,6 @@ io.on("connection", socket => {
                     t["win"] = result2[1];
 
                     results.push(t);
-                    // socket.broadcast.emit("win_rate", result);
-                    // socket.broadcast.emit("direction", results);
                 }
 
                 results.sort(function(a, b) {
@@ -134,8 +133,6 @@ io.on("connection", socket => {
 
                 await io.to(socketId).emit("win_rate", result);
                 await io.to(socketId).emit("direction", results);
-
-                // console.log(results);
             } else {
                 console.error("playerNumber가 잘못함");
             }
@@ -143,44 +140,28 @@ io.on("connection", socket => {
     });
 
     socket.on("change_player", data => {
-        // console.log("change player: ", data);
         map.set(socketId, data);
     });
 
     socket.on("sim_control", data => {
-        if (map.get(data.toId) != undefined) {
-            io.to(data.toId).emit("sim_control_unreal", data.control);
-            console.log("sim_control", data["toId"], data["control"]);
-
-            console.log("sim_control type", typeof data["toId"]);
-        }
+        io.to(data.macAddress).emit("sim_control_unreal", data.control);
     });
 
     socket.on("start_game", data => {
         io.to(data).emit("start_game_unreal", true);
-        console.log("staart_game type", typeof data);
-
-        // console.log("start  ", data);
-        // io.to(data).emit("choice_player", 1);
-        // io.to(data).emit("main_viewport", 1);
     });
 
     socket.on("camera_control", data => {
-        io.to(data.toId).emit("direction_camera", data.camera);
+        io.to(data.macAddress).emit("direction_camera", data.camera);
     });
 
-    socket.on("choice_player_react", async data => {
-        await io.to(data.toId).emit("choice_player", 1);
-        await io.to(data.toId).emit("main_viewport", 1);
-
-        console.log("data", data);
-        // console.log("length", data.toId.length);
-
-        console.log("choice_player type", typeof data.toId);
+    socket.on("choice_player_react", data => {
+        io.to(data.macAddress).emit("choice_player", data.playerNumber);
+        io.to(data.macAddress).emit("main_viewport", data.mainViewport);
     });
 
-    socket.on("disconnect", socket => {
-        console.log("disconnected", socket);
+    socket.on("disconnect", () => {
+        console.log("disconnected");
     });
 });
 
