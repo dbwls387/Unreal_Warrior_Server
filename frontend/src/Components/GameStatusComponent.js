@@ -41,6 +41,8 @@ export default function GameStatusComponent(props) {
 	}
 
 	function onCameraSocket(state) {
+		console.log(state);
+
 		const data = {
 			macAddress: macAddress,
 			camera: state ? 1 : 0,
