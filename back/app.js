@@ -70,7 +70,8 @@ io.on("connection", socket => {
         socket.join(macAddress);
         set.add(macAddress);
 
-        console.log(socket.rooms);
+        // console.log(socket.rooms);
+        console.log(io.sockets.manager.rooms);
     });
 
     if (map.get(socketId) == undefined) {
