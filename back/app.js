@@ -60,6 +60,7 @@ io.on("connection", socket => {
     console.log(socketId);
 
     socket.on("join_room", data => {
+        console.log("1", socket.rooms);
         console.log("join", data);
 
         const macAddress = data.join(".");
