@@ -167,7 +167,7 @@ export default function GameStatusComponent(props) {
 					className="float-left w-1/4 text-center cursor-pointer pl-7 mt-2"
 					ocClick={() => {
 						setToggle(!toggle);
-						onCameraSocket();
+						onCameraSocket(toggle);
 					}}
 				>
 					<FlipCameraIosIcon sx={{ fontSize: 35 }} />
