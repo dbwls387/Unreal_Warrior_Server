@@ -58,7 +58,6 @@ app.get("/hidePlayer", (req, res) => {
 io.on("connection", socket => {
     const socketId = socket.id;
     console.log(socketId);
-    console.log("1", socket.rooms);
 
     socket.on("join_room", data => {
         console.log("join", data);
@@ -70,8 +69,7 @@ io.on("connection", socket => {
         socket.join(macAddress);
         set.add(macAddress);
 
-        // console.log(socket.rooms);
-        console.log(io.sockets.manager.rooms);
+        console.log(socket.rooms);
     });
 
     if (map.get(socketId) == undefined) {
