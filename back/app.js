@@ -114,7 +114,7 @@ io.on("connection", socket => {
                 if (i == 7) {
                     const playerScore = data.data[16].playerScore;
                     inputData["playerScore"] = playerScore;
-                } else if (i == 16) {
+                } else if (i == 15) {
                     const enemyScore = data.data[16].enemyScore;
                     inputData["enemyScore"] = enemyScore;
                 }
