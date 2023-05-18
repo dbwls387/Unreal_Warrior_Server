@@ -96,10 +96,7 @@ io.on("connection", socket => {
                 const x = data.data[i].x;
                 const y = data.data[i].y;
                 const hp = data.data[i].hp;
-                let status = 1;
-                if (!data.data[i].status) {
-                    status = 0;
-                }
+                const status = data.data[i].status == "false" ? 0 : 1;
                 const dis = data.data[i].dis;
 
                 const xKey = "x" + (i + 1).toString();
