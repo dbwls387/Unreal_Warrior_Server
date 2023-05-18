@@ -14,16 +14,12 @@ export default function GameStatusComponent(props) {
 
 	const [team, setTeam] = useState("player");
 	const changeTeam = (event, newTeam) => {
-		setTeam(newTeam);
-
 		if (newTeam === "player") onChoicePlayer(-1);
 		else onChoicePlayer(-2);
 	};
 
 	const [cam, setCam] = useState("map");
 	const changeCam = (event, toggle) => {
-		setCam(toggle);
-
 		if (toggle === "map") onCameraSocket(true);
 		else onCameraSocket(false);
 	};
@@ -156,8 +152,22 @@ export default function GameStatusComponent(props) {
 					onChange={changeTeam}
 					aria-label="Platform"
 				>
-					<ToggleButton value="player">우리 팀</ToggleButton>
-					<ToggleButton value="enemy">상대 팀</ToggleButton>
+					<ToggleButton
+						value="player"
+						onClick={() => {
+							setTeam("player");
+						}}
+					>
+						우리 팀
+					</ToggleButton>
+					<ToggleButton
+						value="enemy"
+						onClick={() => {
+							setTeam("enemy");
+						}}
+					>
+						상대 팀
+					</ToggleButton>
 				</ToggleButtonGroup>
 
 				<ToggleButtonGroup
@@ -169,8 +179,22 @@ export default function GameStatusComponent(props) {
 					aria-label="Platform"
 					className="mx-8 mt-4"
 				>
-					<ToggleButton value="map">전체 맵</ToggleButton>
-					<ToggleButton value="character">캐릭터 화면</ToggleButton>
+					<ToggleButton
+						value="map"
+						onClick={() => {
+							setCam("map");
+						}}
+					>
+						전체 맵
+					</ToggleButton>
+					<ToggleButton
+						value="character"
+						onClick={() => {
+							setCam("character");
+						}}
+					>
+						캐릭터 화면
+					</ToggleButton>
 				</ToggleButtonGroup>
 
 				{/* 일시정지, 재생 */}
