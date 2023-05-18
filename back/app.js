@@ -121,6 +121,7 @@ io.on("connection", socket => {
             }
 
             if (map.get(socketId) == -1) {
+                console.log("inputData", inputData);
                 const result = await loadModel(inputData);
                 console.log("result", result);
                 await io.to(socketId).emit("win_rate", result);
