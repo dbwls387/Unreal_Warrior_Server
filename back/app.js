@@ -31,7 +31,7 @@ async function loadModel(inputData) {
     var as = Object.keys(inputData).map(key => inputData[key]);
 
     // 현재(일시적)의 데이터만을 입력으로 받는다면 아래와 같은 형식을 가지지만, 이전의 과거 데이터까지 포함된다면 달라져야함
-    const tensorData = tf.tensor3d(as, [1, 1, 48]);
+    const tensorData = tf.tensor3d(as, [1, 1, 66]);
 
     // 예측 수행
     const prediction = model.predict(tensorData);
@@ -90,7 +90,7 @@ io.on("connection", socket => {
         if (data.data.length >= 17) {
             let inputData = {};
             let disArray = [];
-            for (let i = 0; i < data.data.length; i++) {
+            for (let i = 0; i < 16; i++) {
                 const x = data.data[i].x;
                 const y = data.data[i].y;
                 const hp = data.data[i].hp;
