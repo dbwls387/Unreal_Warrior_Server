@@ -178,7 +178,7 @@ export default function GameStatusComponent(props) {
 						value="map"
 						onClick={() => {
 							setCam("map");
-							onCameraSocket(true);
+							onCameraSocket(false);
 						}}
 					>
 						전체 맵
@@ -187,7 +187,7 @@ export default function GameStatusComponent(props) {
 						value="character"
 						onClick={() => {
 							setCam("character");
-							onCameraSocket(false);
+							onCameraSocket(true);
 						}}
 					>
 						캐릭터 화면
