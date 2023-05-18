@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import "../Pages/Landing.css";
 import logo from "../assets/pinklogo_circle.png";
 import dld from "../assets/download.png";
-import bgv from "../assets/mbv.mp4"
+import bgv from "../assets/mbv.mp4";
 export default function Landing() {
 	const [swalProps, setSwalProps] = useState({});
 
@@ -57,35 +57,44 @@ export default function Landing() {
 	}
 
 	return (
-		<div 
+		<div
 			style={{
-				width : "100%"
+				width: "100%",
 			}}
-			>
+		>
 			<video
-				autoPlay loop muted
+				autoPlay
+				loop
+				muted
 				style={{
 					position: "absolute",
 					width: "100%",
-					left : "50%",
-					right : "50%",
-					height : "100%",
-					objectFit : "cover",
-					transform : "translate(-50%)",
-					zIndex : -1
-				}}	
+					left: "50%",
+					right: "50%",
+					height: "100%",
+					objectFit: "cover",
+					transform: "translate(-50%)",
+					zIndex: -1,
+				}}
 			>
 				<source src={bgv} type="video/mp4" />
-				
 			</video>
-			<section className="text-gray-700 body-font pt-20" style={{position:"absolute",  width:"100%", height:"100%", top:"15%"}}>
+			<section
+				className="text-gray-700 body-font pt-20"
+				style={{
+					position: "absolute",
+					width: "100%",
+					height: "100%",
+					// top: "7%",
+				}}
+			>
 				<div className="container mx-auto px-5 py-24 md:flex-row flex-col items-center">
 					<div className="flex-col md:items-start mb-0 items-center text-center align-center">
 						<img className="main-logo" src={logo} />
 						{/* <h1 className="title-font sm:text-5xl text-3xl mb-4 font-medium text-gray-900">
 							Unreal Warrior
 						</h1> */}
-						<p className="mb-8 leading-relaxed">
+						<p className="mb-8 leading-relaxed text-white">
 							Play Unreal Warroir and find the best route for your team.
 						</p>
 						<div className="flex justify-center">
@@ -124,9 +133,9 @@ export default function Landing() {
 								className="btn-download ml-4 inline-flex text-white border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
 								onClick={() => {
 									Swal.fire({
-										text: "다운로드 링크",
+										// text: "다운로드 링크",
 										html: `<div>
-                                                http://naver.me/xM8yCjI7
+												<a href="http://naver.me/F2YUOh3O" target='_blank'>[다운로드] 클릭 👆</a>
 											</div>`,
 										confirmButtonColor: "#374151", // confrim 버튼 색깔 지정
 									});
