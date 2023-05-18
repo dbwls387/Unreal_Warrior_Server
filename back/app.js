@@ -97,7 +97,7 @@ io.on("connection", socket => {
                 const y = data.data[i].y;
                 const hp = data.data[i].hp;
                 let status = 1;
-                if (data.data[i].status == false) {
+                if (!data.data[i].status) {
                     status = 0;
                 }
                 const dis = data.data[i].dis;
