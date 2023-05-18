@@ -61,7 +61,7 @@ export default function GameStatusComponent(props) {
 			macAddress: macAddress,
 			playerNumber: player,
 			mainViewport: player < 0 ? 0 : 1,
-			team: player === -2 ? 0 : 1,
+			team: player === -1 ? 0 : 1,
 		};
 
 		socket.emit("choice_player_react", data);

@@ -163,7 +163,7 @@ io.on("connection", socket => {
         io.to(data.macAddress).emit("sim_control_unreal", data.control);
     });
 
-    // 카메라 on/off
+    // 미니맵 / 플레이어 시점 화면 전환
     socket.on("camera_control", data => {
         io.to(data.macAddress).emit("direction_camera", data.camera);
     });
@@ -172,6 +172,7 @@ io.on("connection", socket => {
     socket.on("choice_player_react", data => {
         io.to(data.macAddress).emit("choice_player", data.playerNumber);
         io.to(data.macAddress).emit("main_viewport", data.mainViewport);
+        io.to(data.macAddress).emit("player_enemy_view", data.team);
     });
 
     // 소켓 연결 끊김
