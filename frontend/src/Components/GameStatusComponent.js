@@ -1,25 +1,33 @@
 import React, { useState } from "react";
 import { io } from "socket.io-client";
 
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+
 import PauseCircleOutlineIcon from "@mui/icons-material/PauseCircleOutline";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
-import FlipCameraIosIcon from "@mui/icons-material/FlipCameraIos";
-
-import Filter1Icon from "@mui/icons-material/Filter1";
-import Filter2Icon from "@mui/icons-material/Filter2";
-import Filter3Icon from "@mui/icons-material/Filter3";
-import Filter4Icon from "@mui/icons-material/Filter4";
-import Filter5Icon from "@mui/icons-material/Filter5";
-import Filter6Icon from "@mui/icons-material/Filter6";
-import Filter7Icon from "@mui/icons-material/Filter7";
-import Filter8Icon from "@mui/icons-material/Filter8";
-import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
-import Skull from "../assets/skull.png";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export default function GameStatusComponent(props) {
 	const macAddress = localStorage.getItem("macAddress");
-	const [toggle, setToggle] = useState(true);
+
+	const [team, setTeam] = useState("player");
+	const changeTeam = (event, newTeam) => {
+		setTeam(newTeam);
+
+		if (newTeam === "player") onChoicePlayer(-1);
+		else onChoicePlayer(-2);
+	};
+
+	const [cam, setCam] = useState("map");
+	const changeCam = (event, toggle) => {
+		setCam(toggle);
+
+		if (toggle === "map") onCameraSocket(true);
+		else onCameraSocket(false);
+	};
+
 	const socket = io("https://k8e202.p.ssafy.io", {
 		path: "/socket.io",
 		cors: {
@@ -52,119 +60,139 @@ export default function GameStatusComponent(props) {
 		const data = {
 			macAddress: macAddress,
 			playerNumber: player,
-			mainViewport: player === -1 ? 0 : 1,
+			mainViewport: player < 0 ? 0 : 1,
+			team: player === -2 ? 0 : 1,
 		};
 
 		socket.emit("choice_player_react", data);
 	}
 
+	const theme = createTheme({
+		palette: {
+			primary: {
+				main: "#fb53cb",
+			},
+			success: {
+				main: "#f06292",
+			},
+		},
+	});
+
 	return (
-		<div className="h-28 p-2 w-full ">
-			{/* 플레이어 선택 */}
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(0);
-				}}
-			>
-				<Filter1Icon sx={{ fontSize: 35 }} />
-			</div>
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(1);
-				}}
-			>
-				<Filter2Icon sx={{ fontSize: 35 }} />
-			</div>
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(2);
-				}}
-			>
-				<Filter3Icon sx={{ fontSize: 35 }} />
-			</div>
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(3);
-				}}
-			>
-				<Filter4Icon sx={{ fontSize: 35 }} />
-			</div>
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(4);
-				}}
-			>
-				<Filter5Icon sx={{ fontSize: 35 }} />
-			</div>
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(5);
-				}}
-			>
-				<Filter6Icon sx={{ fontSize: 35 }} />
-			</div>
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(6);
-				}}
-			>
-				<Filter7Icon sx={{ fontSize: 35 }} />
-			</div>
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(7);
-				}}
-			>
-				<Filter8Icon sx={{ fontSize: 35 }} />
-				{/* <img src={Skull} alt="logo" className="h-12 w-12" /> */}
-			</div>
-			<div
-				className="float-left m-4 ml-3 cursor-pointer"
-				onClick={() => {
-					onChoicePlayer(-1);
-				}}
-			>
-				<SwitchAccountIcon sx={{ fontSize: 36 }} />
-			</div>
+		<ThemeProvider theme={theme}>
+			<div className="h-32 p-2 w-full ">
+				{/* 플레이어 선택 */}
+				<ButtonGroup
+					variant="outlined"
+					aria-label="outlined button group"
+					className="mx-8 mt-4"
+					size="large"
+					color="primary"
+				>
+					<Button
+						onClick={() => {
+							onChoicePlayer(0);
+						}}
+					>
+						0
+					</Button>
+					<Button
+						onClick={() => {
+							onChoicePlayer(1);
+						}}
+					>
+						1
+					</Button>
+					<Button
+						onClick={() => {
+							onChoicePlayer(2);
+						}}
+					>
+						2
+					</Button>
+					<Button
+						onClick={() => {
+							onChoicePlayer(3);
+						}}
+					>
+						3
+					</Button>
+					<Button
+						onClick={() => {
+							onChoicePlayer(4);
+						}}
+					>
+						4
+					</Button>
+					<Button
+						onClick={() => {
+							onChoicePlayer(5);
+						}}
+					>
+						5
+					</Button>
+					<Button
+						onClick={() => {
+							onChoicePlayer(6);
+						}}
+					>
+						6
+					</Button>
+					<Button
+						onClick={() => {
+							onChoicePlayer(7);
+						}}
+					>
+						7
+					</Button>
+				</ButtonGroup>
 
-			{/* 일시정지, 재생 */}
-			<div className="float-right w-48 mt-3 mr-4">
-				<div
-					className="float-left w-1/3 text-center cursor-pointer"
-					onClick={() => {
-						onSocket("pause");
-					}}
+				{/* 카메라, 맵 전환 */}
+				<ToggleButtonGroup
+					color="primary"
+					size="small"
+					value={team}
+					exclusive
+					onChange={changeTeam}
+					aria-label="Platform"
 				>
-					<PauseCircleOutlineIcon sx={{ fontSize: 50 }} />
-				</div>
-				<div
-					className="float-left w-1/3 text-center cursor-pointer"
-					onClick={() => {
-						onSocket("play");
-					}}
-				>
-					<PlayCircleOutlineIcon sx={{ fontSize: 50 }} />
-				</div>
+					<ToggleButton value="player">우리 팀</ToggleButton>
+					<ToggleButton value="enemy">상대 팀</ToggleButton>
+				</ToggleButtonGroup>
 
-				{/* 카메라 전환 */}
-				<div
-					className="float-left w-1/3 text-center cursor-pointer pl-7 mt-2"
-					onClick={() => {
-						setToggle(!toggle);
-						onCameraSocket(toggle);
-					}}
+				<ToggleButtonGroup
+					color="primary"
+					size="small"
+					value={cam}
+					exclusive
+					onChange={changeCam}
+					aria-label="Platform"
+					className="mx-8 mt-4"
 				>
-					<FlipCameraIosIcon sx={{ fontSize: 35 }} />
+					<ToggleButton value="map">전체 맵</ToggleButton>
+					<ToggleButton value="character">캐릭터 화면</ToggleButton>
+				</ToggleButtonGroup>
+
+				{/* 일시정지, 재생 */}
+				<div className="float-right w-48 mt-4 mr-4">
+					<div
+						className="float-left w-1/3 text-center cursor-pointer"
+						onClick={() => {
+							onSocket("pause");
+						}}
+					>
+						<PauseCircleOutlineIcon sx={{ fontSize: 43 }} color="success" />
+					</div>
+					<div
+						className="float-left w-1/3 text-center cursor-pointer"
+						onClick={() => {
+							onSocket("play");
+						}}
+					>
+						<PlayCircleOutlineIcon sx={{ fontSize: 43 }} color="success" />
+					</div>
 				</div>
 			</div>
-		</div>
+		</ThemeProvider>
 	);
 }

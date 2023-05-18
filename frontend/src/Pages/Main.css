@@ -33,17 +33,5 @@ body {
 }
 
 .rootDiv-0-2-1 {
-	height: 80% !important;
-}
-
-.left {
-	width: 40%;
-	height: 100%;
-	float: left;
-}
-.right {
-	width: 60%;
-	height: 100%;
-	float: right;
-	/* padding: 30px; */
+	height: 72% !important;
 }
