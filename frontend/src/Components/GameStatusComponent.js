@@ -94,56 +94,56 @@ export default function GameStatusComponent(props) {
 							onChoicePlayer(0);
 						}}
 					>
-						0
+						1
 					</Button>
 					<Button
 						onClick={() => {
 							onChoicePlayer(1);
 						}}
 					>
-						1
+						2
 					</Button>
 					<Button
 						onClick={() => {
 							onChoicePlayer(2);
 						}}
 					>
-						2
+						3
 					</Button>
 					<Button
 						onClick={() => {
 							onChoicePlayer(3);
 						}}
 					>
-						3
+						4
 					</Button>
 					<Button
 						onClick={() => {
 							onChoicePlayer(4);
 						}}
 					>
-						4
+						5
 					</Button>
 					<Button
 						onClick={() => {
 							onChoicePlayer(5);
 						}}
 					>
-						5
+						6
 					</Button>
 					<Button
 						onClick={() => {
 							onChoicePlayer(6);
 						}}
 					>
-						6
+						7
 					</Button>
 					<Button
 						onClick={() => {
 							onChoicePlayer(7);
 						}}
 					>
-						7
+						8
 					</Button>
 				</ButtonGroup>
 
