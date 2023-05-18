@@ -78,7 +78,7 @@ export default function Landing() {
 				<source src={bgv} type="video/mp4" />
 				
 			</video>
-			<section className="text-gray-700 body-font pt-20" style={{position:"absolute", left:"40%", top: " 15%"}}>
+			<section className="text-gray-700 body-font pt-20" style={{position:"absolute",  width:"100%", height:"100%", top:"15%"}}>
 				<div className="container mx-auto px-5 py-24 md:flex-row flex-col items-center">
 					<div className="flex-col md:items-start mb-0 items-center text-center align-center">
 						<img className="main-logo" src={logo} />
