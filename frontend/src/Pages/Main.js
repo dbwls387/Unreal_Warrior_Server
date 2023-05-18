@@ -54,13 +54,13 @@ export default function Main(props) {
 
 	return (
 		<div className="main">
-			<div className="h-3/4 relative">
+			<div className="h-5/6 relative">
 				<MetaProvider>
 					<PlayerView />
 				</MetaProvider>
 			</div>
 
-			<div className="h-1/4 text-black z-[9999999] bg-white pt-4">
+			<div className="h-1/6 text-black z-[9999999] bg-white pt-4">
 				<div className="status">
 					<GameStatusComponent socket={props.socket} />
 				</div>

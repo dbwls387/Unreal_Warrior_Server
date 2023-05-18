@@ -135,10 +135,10 @@ export default function GameStatusComponent(props) {
 				<SwitchAccountIcon sx={{ fontSize: 36 }} />
 			</div>
 
-			{/* 일시정지, 재생, 멈춤 */}
-			<div className="float-right w-64 mt-3 mr-4">
+			{/* 일시정지, 재생 */}
+			<div className="float-right w-48 mt-3 mr-4">
 				<div
-					className="float-left w-1/4 text-center cursor-pointer"
+					className="float-left w-1/3 text-center cursor-pointer"
 					onClick={() => {
 						onSocket("pause");
 					}}
@@ -146,25 +146,17 @@ export default function GameStatusComponent(props) {
 					<PauseCircleOutlineIcon sx={{ fontSize: 50 }} />
 				</div>
 				<div
-					className="float-left w-1/4 text-center cursor-pointer"
+					className="float-left w-1/3 text-center cursor-pointer"
 					onClick={() => {
 						onSocket("play");
 					}}
 				>
 					<PlayCircleOutlineIcon sx={{ fontSize: 50 }} />
 				</div>
-				<div
-					className="float-left w-1/4 text-center cursor-pointer"
-					onClick={() => {
-						onSocket("stop");
-					}}
-				>
-					<StopCircleOutlinedIcon sx={{ fontSize: 50 }} />
-				</div>
 
 				{/* 카메라 전환 */}
 				<div
-					className="float-left w-1/4 text-center cursor-pointer pl-7 mt-2"
+					className="float-left w-1/3 text-center cursor-pointer pl-7 mt-2"
 					onClick={() => {
 						setToggle(!toggle);
 						onCameraSocket(toggle);
