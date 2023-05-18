@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import "../Pages/Landing.css";
 import logo from "../assets/pinklogo_circle.png";
 import dld from "../assets/download.png";
-
+import bgv from "../assets/mbv.mp4"
 export default function Landing() {
 	const [swalProps, setSwalProps] = useState({});
 
@@ -57,8 +57,28 @@ export default function Landing() {
 	}
 
 	return (
-		<>
-			<section className="text-gray-700 body-font pt-20">
+		<div 
+			style={{
+				width : "100%"
+			}}
+			>
+			<video
+				autoPlay loop muted
+				style={{
+					position: "absolute",
+					width: "100%",
+					left : "50%",
+					right : "50%",
+					height : "100%",
+					objectFit : "cover",
+					transform : "translate(-50%)",
+					zIndex : -1
+				}}	
+			>
+				<source src={bgv} type="video/mp4" />
+				
+			</video>
+			<section className="text-gray-700 body-font pt-20" style={{position:"absolute", left:"40%", top: " 15%"}}>
 				<div className="container mx-auto px-5 py-24 md:flex-row flex-col items-center">
 					<div className="flex-col md:items-start mb-0 items-center text-center align-center">
 						<img className="main-logo" src={logo} />
@@ -143,6 +163,6 @@ export default function Landing() {
 					</div>
 				</div>
 			</section>
-		</>
+		</div>
 	);
 }
