@@ -87,24 +87,35 @@ io.on("connection", socket => {
     });
 
     socket.on("actor_status", async data => {
-        if (data.data.length >= 16) {
+        if (data.data.length >= 17) {
             let inputData = {};
             let disArray = [];
             for (let i = 0; i < data.data.length; i++) {
                 const x = data.data[i].x;
                 const y = data.data[i].y;
                 const hp = data.data[i].hp;
+                const status = data.data[i].status;
                 const dis = data.data[i].dis;
 
                 const xKey = "x" + (i + 1).toString();
                 const yKey = "y" + (i + 1).toString();
                 const hpKey = "hp" + (i + 1).toString();
+                const statusKey = "status" + (i + 1).toString();
 
                 inputData[xKey] = x;
                 inputData[yKey] = y;
                 inputData[hpKey] = hp;
+                inputData[statusKey] = status;
 
                 disArray.push(dis);
+
+                if (i == 7) {
+                    const playerScore = data.data[16].playerScore;
+                    inputData["playerScore"] = playerScore;
+                } else if (i == 16) {
+                    const enemyScore = data.data[16].enemyScore;
+                    inputData["enemyScore"] = enemyScore;
+                }
             }
 
             if (map.get(socketId) == -1) {
