@@ -87,6 +87,8 @@ io.on("connection", socket => {
     });
 
     socket.on("actor_status", async data => {
+        console.log("data: ", data);
+
         if (data.data.length >= 17) {
             let inputData = {};
             let disArray = [];
