@@ -10,8 +10,6 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// let playerNumber = -1;
-
 let map = new Map();
 let set = new Set();
 
@@ -36,9 +34,6 @@ async function loadModel(inputData) {
     // 예측 수행
     const prediction = model.predict(tensorData);
 
-    // 결과 출력
-    // prediction.print();
-
     const result = await prediction.array();
     return result[0];
 }
@@ -47,22 +42,23 @@ app.get("/", (req, res) => {
     res.redirect("https://k8e202.p.ssafy.io");
 });
 
+// player 선택
 app.post("/showPlayer", (req, res) => {
     playerNumber = req.body.playerNumber;
 });
 
+// player 선택 해제
 app.get("/hidePlayer", (req, res) => {
     playerNumber = -1;
 });
 
+// socket connect
 io.on("connection", socket => {
     const socketId = socket.id;
-    console.log(socketId);
 
+    // 1 : 1 매칭(MAC 주소 활용)
     socket.on("join_room", data => {
-        // console.log("join", data);
-
-        var macAddress = "";
+        let macAddress = "";
         if (typeof data === "string") {
             macAddress = data;
             io.to(data).emit("start_game_unreal", true);
@@ -70,14 +66,13 @@ io.on("connection", socket => {
 
         socket.join(macAddress);
         set.add(macAddress);
-
-        console.log(socket.rooms);
     });
 
     if (map.get(socketId) == undefined) {
         map.set(socketId, -1);
     }
 
+    // react에서 mac주소로 unreal 연결
     socket.on("unreal_socket_id", data => {
         if (set.has(data.mac)) {
             io.sockets.in(data.id).emit("connect_unreal", true);
@@ -86,9 +81,8 @@ io.on("connection", socket => {
         }
     });
 
+    // DL로 연산후 결과 unreal로 전송
     socket.on("actor_status", async data => {
-        console.log("data: ", data);
-
         if (data.data.length >= 17) {
             let inputData = {};
             let disArray = [];
@@ -121,9 +115,7 @@ io.on("connection", socket => {
             }
 
             if (map.get(socketId) == -1) {
-                console.log("inputData", inputData);
                 const result = await loadModel(inputData);
-                console.log("result", result);
                 await io.to(socketId).emit("win_rate", result);
             } else if (map.get(socketId) >= 0 && map.get(socketId) <= 7) {
                 const result = await loadModel(inputData);
@@ -161,29 +153,28 @@ io.on("connection", socket => {
         }
     });
 
+    // player 변경
     socket.on("change_player", data => {
         map.set(socketId, data);
     });
 
+    // 게임 일시 정지 및 재시작
     socket.on("sim_control", data => {
         io.to(data.macAddress).emit("sim_control_unreal", data.control);
     });
 
-    // socket.on("start_game", data => {
-    //     io.to(data).emit("start_game_unreal", true);
-    // });
-
+    // 카메라 on/off
     socket.on("camera_control", data => {
-        console.log("camera_control", data.camera);
         io.to(data.macAddress).emit("direction_camera", data.camera);
     });
 
+    // react에서 player 선택
     socket.on("choice_player_react", data => {
-        console.log("choice_player", data.playerNumber);
         io.to(data.macAddress).emit("choice_player", data.playerNumber);
         io.to(data.macAddress).emit("main_viewport", data.mainViewport);
     });
 
+    // 소켓 연결 끊김
     socket.on("disconnect", () => {
         console.log("disconnected");
     });
