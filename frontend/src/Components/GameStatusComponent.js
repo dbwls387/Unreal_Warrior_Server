@@ -12,16 +12,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 export default function GameStatusComponent(props) {
 	const macAddress = localStorage.getItem("macAddress");
 
+	const [cam, setCam] = useState("map");
 	const [team, setTeam] = useState("player");
 	const changeTeam = (event, newTeam) => {
 		if (newTeam === "player") onChoicePlayer(-1);
 		else onChoicePlayer(-2);
-	};
-
-	const [cam, setCam] = useState("map");
-	const changeCam = (event, toggle) => {
-		if (toggle === "map") onCameraSocket(true);
-		else onCameraSocket(false);
 	};
 
 	const socket = io("https://k8e202.p.ssafy.io", {
@@ -175,7 +170,7 @@ export default function GameStatusComponent(props) {
 					size="small"
 					value={cam}
 					exclusive
-					onChange={changeCam}
+					// onChange={changeCam}
 					aria-label="Platform"
 					className="mx-8 mt-4"
 				>
@@ -183,6 +178,7 @@ export default function GameStatusComponent(props) {
 						value="map"
 						onClick={() => {
 							setCam("map");
+							onCameraSocket(true);
 						}}
 					>
 						전체 맵
@@ -191,6 +187,7 @@ export default function GameStatusComponent(props) {
 						value="character"
 						onClick={() => {
 							setCam("character");
+							onCameraSocket(false);
 						}}
 					>
 						캐릭터 화면
