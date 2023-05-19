@@ -45,29 +45,51 @@
 
 ## 4. 기술 스택
 
-**Service**
+<br />
 
--   Unreal Engine 5.1
--   C++
--   Tensorflow
--   Python
--   Node.js
+### **Service**
+
+
+![Generic badge](https://img.shields.io/badge/react-ffffff?style=for-the-badge&logo=react) ![Generic
+badge](https://img.shields.io/badge/javascript-ffffff?style=for-the-badge&logo=javascript) ![Generic 
+badge](https://img.shields.io/badge/python-ffffff?style=for-the-badge&logo=python) ![Generic
+badge](https://img.shields.io/badge/tensorflow-ffffff?style=for-the-badge&logo=tensorflow) 
+
+![Generic
+badge](https://img.shields.io/badge/node.js-ffffff?style=for-the-badge&logo=node.js) 
+![Generic
+badge](https://img.shields.io/badge/unreal-000000?style=for-the-badge&logo=unrealengine)
+![Generic
+badge](https://img.shields.io/badge/c++-689df2?style=for-the-badge&logo=cpp)
+![Generic
+badge](https://img.shields.io/badge/jupyter-ffffff?style=for-the-badge&logo=jupyter)
+<br />
+<br />
 
 **Infra**
+<br />
+![Generic
+badge](https://img.shields.io/badge/aws-ffffff?style=for-the-badge&logo=amazon) 
+![Generic
+badge](https://img.shields.io/badge/nginx-000000?style=for-the-badge&logo=nginx)
+![Generic
+badge](https://img.shields.io/badge/jenkins-ffffff?style=for-the-badge&logo=jenkins)
+![Generic
+badge](https://img.shields.io/badge/docker-ffffff?style=for-the-badge&logo=docker)
 
--   Colab ML Server
--   AWS EC2
--   Docker
--   Jenkins
--   NginX
+<br />
 
 **Team Collaboration Tool**
+<br />
+![Generic
+badge](https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion)
+![Generic
+badge](https://img.shields.io/badge/gitlab-ffffff?style=for-the-badge&logo=gitlab)
+![Generic
+badge](https://img.shields.io/badge/jira-000000?style=for-the-badge&logo=jira)
 
--   Notion
--   GitLab
--   Jira
--   SVN
-
+<br />
+ 
 ---
 
 ## 5. 유사서비스분석
@@ -80,3 +102,18 @@ DeepMind의 AlphaStar는 스타크래프트 II에서 고수준의 전략을 만�
 ---
 
 ## 6. 기능설명
+### ✔ 메인페이지
+![main5](https://github.com/acrnm148/COSMOS/assets/87971876/581410b6-68d5-4a56-904f-382cff3676b8)
+
+### ✔ 캐릭터 카메라
+![main3](https://github.com/acrnm148/COSMOS/assets/87971876/5b3cff96-4030-4556-b11e-3c927739767c)
+
+### ✔ 플레이어 추천경로
+![main2](https://github.com/acrnm148/COSMOS/assets/87971876/68670504-3f7f-4a7a-937c-e7f7fcc48938)
+
+### ✔ 플레이어 전체 진행상황
+![main1](https://github.com/acrnm148/COSMOS/assets/87971876/fc91d992-eeeb-4aa1-b519-88d10f0d4282)
+
+### ✔ 게임 일시정지
+![main4](https://github.com/acrnm148/COSMOS/assets/87971876/c5ccd924-d29a-4cd6-b1eb-75f2e19dcb6e)
+
