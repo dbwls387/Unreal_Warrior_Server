@@ -61,10 +61,10 @@ export default function GameStatusComponent(props) {
 	const theme = createTheme({
 		palette: {
 			primary: {
-				main: "#fb53cb",
+				main: "#374151",
 			},
 			success: {
-				main: "#f06292",
+				main: "#374151",
 			},
 		},
 	});
