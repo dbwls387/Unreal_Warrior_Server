@@ -113,9 +113,9 @@ export default function Landing() {
 											"<br>" +
 											"<b>STEP2</b><br>" +
 											"<p>아래 경로의 <strong>run.bat</strong>파일을 실행합니다.</p>" +
-											'<p style="color:gray;">Epic Games/5.1/Engine/Source/Programs/PixelStreaming/Webservers/SignallingWebserver</p><br>' +
+											'<p style="color:gray;">Windows/UW/Samples/PixelStreaming/WebServers/SignallingWebServer/platform_scripts/cmd/run_local.bat</p><br>' +
 											"<b>STEP3</b><br>" +
-											"zip파일을 풀고 exe 파일을 실행합니다.<br><br>" +
+											"zip파일을 풀고 aiAvatarTest.exe-실행 파일을 실행합니다.<br><br>" +
 											"<b>STEP4</b><br>" +
 											"<p>게임 시작시 나오는 코드를 브라우저에 입력합니다.</p>" +
 											"<p>이제 브라우저에서 화면을 컨트롤 할 수 있습니다!</p>",
